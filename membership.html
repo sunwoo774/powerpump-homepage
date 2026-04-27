@@ -375,7 +375,7 @@
     </div>
   </footer>
 
-  <a href="tel:010-4757-3396" class="fixed bottom-5 right-5 z-50 lg:hidden inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-accent text-white text-base font-bold shadow-lg shadow-accent/25 hover:bg-accent-hover transition-colors" aria-label="멤버십 상담하기">
+  <a href="tel:010-4757-3396" class="mobile-floating-call opacity-0 pointer-events-none translate-y-3 fixed bottom-5 right-5 z-50 lg:hidden inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-accent text-white text-base font-bold shadow-lg shadow-accent/25 hover:bg-accent-hover transition-all duration-300" aria-label="멤버십 상담하기">
     <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
     상담
   </a>
@@ -383,6 +383,15 @@
   <script src="analytics.js"></script>
   <script>
     const revealItems = Array.from(document.querySelectorAll('.fade-up'));
+    const floatingCall = document.querySelector('.mobile-floating-call');
+    const updateFloatingCall = () => {
+      if (!floatingCall) return;
+      const shouldShow = window.scrollY > window.innerHeight * 0.75;
+      floatingCall.classList.toggle('opacity-0', !shouldShow);
+      floatingCall.classList.toggle('pointer-events-none', !shouldShow);
+      floatingCall.classList.toggle('translate-y-3', !shouldShow);
+    };
+
     const revealOnScroll = () => {
       const triggerY = window.innerHeight * 0.88;
       revealItems.forEach(item => {
@@ -394,13 +403,19 @@
       });
     };
 
+    const handleViewportUpdate = () => {
+      revealOnScroll();
+      updateFloatingCall();
+    };
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       revealItems.forEach(item => item.classList.add('is-visible'));
     } else {
       revealOnScroll();
-      window.addEventListener('scroll', revealOnScroll, { passive: true });
-      window.addEventListener('resize', revealOnScroll);
     }
+    updateFloatingCall();
+    window.addEventListener('scroll', handleViewportUpdate, { passive: true });
+    window.addEventListener('resize', handleViewportUpdate);
   </script>
 </body>
 </html>
