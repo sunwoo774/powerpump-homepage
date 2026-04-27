@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>관리자 방문 통계 | 파워펌프</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#1d4ed8',
+            'accent-hover': '#1e40af'
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <style>
+    body { word-break: keep-all; overflow-wrap: break-word; }
+    .metric-card { box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06); }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-700 font-sans antialiased">
+  <main class="min-h-screen">
+    <section id="login-view" class="min-h-screen flex items-center justify-center px-5 py-16">
+      <div class="w-full max-w-md rounded-2xl bg-white border border-zinc-200 p-6 sm:p-8 shadow-xl shadow-zinc-900/5">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-5">
+          <span class="iconify" data-icon="solar:lock-keyhole-bold" data-width="26"></span>
+        </div>
+        <h1 class="text-2xl font-bold text-zinc-900 mb-2">관리자 통계 확인</h1>
+        <p class="text-base text-zinc-500 leading-relaxed mb-6">고객에게 링크하지 않는 관리자 전용 화면입니다. 기본 확인번호는 전화번호 끝자리입니다.</p>
+        <form id="login-form" class="space-y-4">
+          <label class="block">
+            <span class="block text-sm font-semibold text-zinc-700 mb-2">확인번호</span>
+            <input id="pin-input" type="password" inputmode="numeric" autocomplete="off" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-lg focus:outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent" placeholder="확인번호 입력">
+          </label>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-white font-bold hover:bg-accent-hover transition-colors">
+            <span class="iconify" data-icon="solar:login-3-bold" data-width="18"></span>
+            들어가기
+          </button>
+          <p id="login-error" class="hidden text-sm text-red-600">확인번호가 맞지 않습니다.</p>
+        </form>
+        <div class="mt-6 rounded-xl bg-amber-50 border border-amber-200 p-4">
+          <p class="text-sm text-amber-800 leading-relaxed">이 확인번호 방식은 정적 사이트용 임시 보호입니다. 실제 운영에서는 Netlify/Vercel 비밀번호 보호, 서버 로그인, GA4/네이버 애널리틱스 권한 관리가 가장 안전합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard-view" class="hidden py-8 sm:py-10">
+      <div class="max-w-7xl mx-auto px-5">
+        <header class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-8">
+          <div>
+            <p class="text-sm font-bold text-accent mb-2">POWERPUMP ADMIN</p>
+            <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900 leading-tight">방문자 유입 통계</h1>
+            <p class="text-base text-zinc-500 mt-3 leading-relaxed">현재 화면은 브라우저 로컬 이벤트를 기준으로 보여줍니다. 실제 전체 방문자 합계는 하단 운영 연결 방식으로 GA4, 네이버 애널리틱스, 서버 저장소와 연결하면 정확해집니다.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <a href="index.html" class="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-700 hover:border-zinc-400 transition-colors">
+              홈페이지 보기
+            </a>
+            <button id="refresh-btn" class="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-white hover:bg-accent-hover transition-colors">
+              <span class="iconify" data-icon="solar:refresh-bold" data-width="16"></span>
+              새로고침
+            </button>
+          </div>
+        </header>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
+          <div class="metric-card rounded-2xl bg-white border border-zinc-200/70 p-5">
+            <p class="text-sm text-zinc-500 mb-2">총 방문 이벤트</p>
+            <p id="total-views" class="text-3xl font-bold text-zinc-900">0</p>
+          </div>
+          <div class="metric-card rounded-2xl bg-white border border-emerald-200 p-5">
+            <p class="text-sm text-zinc-500 mb-2">추정 방문자</p>
+            <p id="total-visitors" class="text-3xl font-bold text-emerald-700">0</p>
+          </div>
+          <div class="metric-card rounded-2xl bg-white border border-amber-200 p-5">
+            <p class="text-sm text-zinc-500 mb-2">전화 클릭</p>
+            <p id="phone-clicks" class="text-3xl font-bold text-amber-700">0</p>
+          </div>
+          <div class="metric-card rounded-2xl bg-white border border-sky-200 p-5">
+            <p class="text-sm text-zinc-500 mb-2">네이버 유입/이동</p>
+            <p id="naver-clicks" class="text-3xl font-bold text-sky-700">0</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-5 mb-8">
+          <section class="rounded-2xl bg-white border border-zinc-200/70 p-5 sm:p-6">
+            <div class="flex items-center justify-between gap-3 mb-5">
+              <h2 class="text-xl font-bold text-zinc-900">유입 경로</h2>
+              <span class="text-xs text-zinc-400">referrer 기준</span>
+            </div>
+            <div id="referrer-list" class="space-y-3"></div>
+          </section>
+
+          <section class="rounded-2xl bg-white border border-zinc-200/70 p-5 sm:p-6">
+            <div class="flex items-center justify-between gap-3 mb-5">
+              <h2 class="text-xl font-bold text-zinc-900">인기 페이지</h2>
+              <span class="text-xs text-zinc-400">page view 기준</span>
+            </div>
+            <div id="page-list" class="space-y-3"></div>
+          </section>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-8">
+          <section class="rounded-2xl bg-white border border-zinc-200/70 p-5 sm:p-6">
+            <h2 class="text-xl font-bold text-zinc-900 mb-5">클릭 행동</h2>
+            <div id="action-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          </section>
+
+          <section class="rounded-2xl bg-white border border-zinc-200/70 p-5 sm:p-6">
+            <h2 class="text-xl font-bold text-zinc-900 mb-5">최근 이벤트</h2>
+            <div id="recent-list" class="space-y-3 max-h-80 overflow-auto pr-1"></div>
+          </section>
+        </div>
+
+        <section class="rounded-2xl bg-zinc-900 text-white p-6 sm:p-8 mb-8">
+          <div class="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6">
+            <div>
+              <p class="text-sm font-bold text-amber-300 mb-2">운영 추천</p>
+              <h2 class="text-2xl sm:text-3xl font-bold mb-3">고객 전체 유입을 보려면 이렇게 연결하는 게 좋습니다</h2>
+              <p class="text-zinc-300 leading-relaxed">관리자 페이지를 고객에게 숨기는 것과, 방문자 전체 데이터를 정확히 모으는 것은 별도 문제입니다. 실제 공개 운영 시에는 서버 인증과 공식 분석 도구를 함께 쓰는 구성이 안전합니다.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div class="rounded-xl bg-white/10 border border-white/10 p-4">
+                <p class="font-bold mb-2">1. GA4 또는 네이버 애널리틱스</p>
+                <p class="text-sm text-zinc-300 leading-relaxed">총 방문자, 검색어, 유입 경로를 안정적으로 확인합니다.</p>
+              </div>
+              <div class="rounded-xl bg-white/10 border border-white/10 p-4">
+                <p class="font-bold mb-2">2. 관리자 URL 비공개</p>
+                <p class="text-sm text-zinc-300 leading-relaxed">사이트 메뉴에는 노출하지 않고 검색 차단을 적용합니다.</p>
+              </div>
+              <div class="rounded-xl bg-white/10 border border-white/10 p-4">
+                <p class="font-bold mb-2">3. 서버 비밀번호 보호</p>
+                <p class="text-sm text-zinc-300 leading-relaxed">배포 후에는 호스팅 설정에서 관리자 페이지 접근을 막습니다.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rounded-2xl bg-white border border-zinc-200/70 p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-bold text-zinc-900 mb-2">로컬 테스트 데이터 관리</h2>
+              <p class="text-base text-zinc-500 leading-relaxed">이 버튼은 현재 브라우저에 저장된 임시 이벤트만 삭제합니다. 실제 분석 도구 데이터에는 영향을 주지 않습니다.</p>
+            </div>
+            <button id="clear-btn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-bold text-red-700 hover:bg-red-100 transition-colors">
+              로컬 데이터 초기화
+            </button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="analytics.js"></script>
+  <script>
+    const ADMIN_PIN = '3396';
+    const AUTH_KEY = 'powerpumpAdminAuthorized';
+
+    const loginView = document.getElementById('login-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const loginForm = document.getElementById('login-form');
+    const pinInput = document.getElementById('pin-input');
+    const loginError = document.getElementById('login-error');
+
+    const formatTime = (iso) => {
+      const date = new Date(iso);
+      return date.toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+    };
+
+    const countBy = (items, getter) => {
+      const map = new Map();
+      items.forEach(item => {
+        const key = getter(item) || '직접 방문';
+        map.set(key, (map.get(key) || 0) + 1);
+      });
+      return [...map.entries()].sort((a, b) => b[1] - a[1]);
+    };
+
+    const renderRows = (targetId, rows, emptyText) => {
+      const target = document.getElementById(targetId);
+      if (!rows.length) {
+        target.innerHTML = `<p class="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-base text-zinc-500">${emptyText}</p>`;
+        return;
+      }
+      target.innerHTML = rows.slice(0, 6).map(([label, count]) => `
+        <div class="flex items-center justify-between gap-3 rounded-xl bg-zinc-50 border border-zinc-200/70 px-4 py-3">
+          <span class="text-base text-zinc-700 truncate">${label}</span>
+          <span class="text-sm font-bold text-zinc-900">${count}</span>
+        </div>
+      `).join('');
+    };
+
+    const renderDashboard = () => {
+      const events = window.powerpumpAnalytics?.readEvents?.() || [];
+      const pageViews = events.filter(event => event.type === 'page_view');
+      const visitors = new Set(events.map(event => event.visitorId).filter(Boolean));
+      const phoneClicks = events.filter(event => event.type === 'phone_click');
+      const naverClicks = events.filter(event => event.type === 'naver_blog_click' || event.type === 'naver_place_click');
+
+      document.getElementById('total-views').textContent = pageViews.length.toLocaleString('ko-KR');
+      document.getElementById('total-visitors').textContent = visitors.size.toLocaleString('ko-KR');
+      document.getElementById('phone-clicks').textContent = phoneClicks.length.toLocaleString('ko-KR');
+      document.getElementById('naver-clicks').textContent = naverClicks.length.toLocaleString('ko-KR');
+
+      renderRows('referrer-list', countBy(pageViews, event => {
+        if (!event.referrer) return '직접 방문';
+        try { return new URL(event.referrer).hostname; } catch (_) { return event.referrer; }
+      }), '아직 유입 경로 데이터가 없습니다.');
+
+      renderRows('page-list', countBy(pageViews, event => event.path || '/'), '아직 페이지 방문 데이터가 없습니다.');
+
+      const actions = [
+        ['전화 클릭', phoneClicks.length, 'text-amber-700 bg-amber-50 border-amber-200'],
+        ['멤버십 클릭', events.filter(event => event.type === 'membership_click').length, 'text-blue-700 bg-blue-50 border-blue-200'],
+        ['블로그 클릭', events.filter(event => event.type === 'naver_blog_click').length, 'text-emerald-700 bg-emerald-50 border-emerald-200'],
+        ['스마트플레이스 클릭', events.filter(event => event.type === 'naver_place_click').length, 'text-sky-700 bg-sky-50 border-sky-200']
+      ];
+      document.getElementById('action-list').innerHTML = actions.map(([label, count, classes]) => `
+        <div class="rounded-xl border p-4 ${classes}">
+          <p class="text-sm opacity-80 mb-1">${label}</p>
+          <p class="text-2xl font-bold">${count.toLocaleString('ko-KR')}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('recent-list').innerHTML = events.slice(-20).reverse().map(event => `
+        <div class="rounded-xl bg-zinc-50 border border-zinc-200/70 px-4 py-3">
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-sm font-bold text-zinc-900">${event.type}</p>
+            <p class="text-xs text-zinc-400">${formatTime(event.createdAt)}</p>
+          </div>
+          <p class="text-sm text-zinc-500 mt-1">${event.path || '/'} ${event.data?.label ? `· ${event.data.label}` : ''}</p>
+        </div>
+      `).join('') || '<p class="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-base text-zinc-500">아직 이벤트가 없습니다.</p>';
+    };
+
+    const showDashboard = () => {
+      loginView.classList.add('hidden');
+      dashboardView.classList.remove('hidden');
+      renderDashboard();
+    };
+
+    if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+      showDashboard();
+    }
+
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (pinInput.value.trim() === ADMIN_PIN) {
+        sessionStorage.setItem(AUTH_KEY, 'true');
+        showDashboard();
+      } else {
+        loginError.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('refresh-btn').addEventListener('click', renderDashboard);
+    document.getElementById('clear-btn').addEventListener('click', () => {
+      const confirmed = window.confirm('현재 브라우저의 로컬 테스트 통계를 삭제할까요?');
+      if (!confirmed) return;
+      window.powerpumpAnalytics?.clearLocalEvents?.();
+      renderDashboard();
+    });
+  </script>
+</body>
+</html>

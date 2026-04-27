@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지하수 펌프 안심관리 멤버십 | 한일윌로모터펌프수리</title>
+  <meta name="description" content="양평 한일윌로모터펌프 · GS파워펌프서비스 양평센터의 지하수 펌프 정기점검 멤버십. 전원주택, 펜션, 세컨하우스, 농가 물 끊김 예방 상담.">
+  <meta name="keywords" content="지하수 펌프 멤버십, 펌프 정기점검, 양평 펌프수리, 가평 펌프수리, 압력탱크 점검, 수중모터 점검">
+  <meta name="theme-color" content="#1d4ed8">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="지하수 펌프 안심관리 멤버십">
+  <meta property="og:description" content="갑작스러운 물 끊김을 줄이는 정기 점검 서비스. 연 149,000원부터 상담 가능합니다.">
+  <meta property="og:image" content="images/media/membership-flyer.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#1d4ed8',
+            'accent-hover': '#1e40af'
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { word-break: keep-all; overflow-wrap: break-word; }
+    .glass-nav { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .text-gradient { background: linear-gradient(135deg, #1d4ed8, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .soft-shadow { box-shadow: 0 20px 60px rgba(15, 23, 42, 0.10); }
+    .price-card { box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.18), 0 18px 45px rgba(15, 23, 42, 0.08); }
+    .motion-water::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto -10%;
+      height: 48%;
+      background:
+        linear-gradient(110deg, transparent 0%, rgba(29, 78, 216, 0.10) 38%, rgba(5, 150, 105, 0.12) 50%, transparent 64%),
+        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.10), transparent 58%);
+      transform: translateX(-35%) rotate(-3deg);
+      animation: waterSweep 9s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .shine-badge { position: relative; overflow: hidden; }
+    .shine-badge::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.7) 45%, transparent 65%);
+      transform: translateX(-130%);
+      animation: badgeShine 4.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .float-slow { animation: floatSlow 5.8s ease-in-out infinite; }
+    .call-pulse { animation: callPulse 2.8s ease-in-out infinite; }
+    @keyframes waterSweep {
+      0%, 100% { transform: translateX(-35%) rotate(-3deg); opacity: 0.45; }
+      50% { transform: translateX(28%) rotate(2deg); opacity: 0.9; }
+    }
+    @keyframes badgeShine {
+      0%, 52%, 100% { transform: translateX(-130%); }
+      72% { transform: translateX(130%); }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes callPulse {
+      0%, 100% { box-shadow: 0 10px 28px rgba(29, 78, 216, 0.20); }
+      50% { box-shadow: 0 14px 38px rgba(29, 78, 216, 0.34); }
+    }
+    @keyframes focusReveal {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+    .fade-up { opacity: 0; transform: translateY(18px) scale(0.985); filter: blur(10px); }
+    .fade-up.is-visible { animation: focusReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .stagger-1.is-visible { animation-delay: 0.06s; }
+    .stagger-2.is-visible { animation-delay: 0.12s; }
+    .stagger-3.is-visible { animation-delay: 0.18s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .fade-up, .motion-water::before, .shine-badge::after, .float-slow, .call-pulse { animation: none; opacity: 1; transform: none; filter: none; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "지하수 펌프 안심관리 멤버십",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "한일윌로모터펌프수리 / 파워펌프 양평서비스센터",
+      "telephone": "010-4757-3396",
+      "address": "경기도 양평군 양평읍 남북로 108"
+    },
+    "areaServed": ["양평", "남양주", "가평", "하남", "여주", "이천", "춘천", "홍천"],
+    "offers": [
+      { "@type": "Offer", "name": "안심회원", "price": "149000", "priceCurrency": "KRW" },
+      { "@type": "Offer", "name": "물끊김 안심관리", "price": "299000", "priceCurrency": "KRW" }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-white text-zinc-700 font-sans antialiased">
+
+  <header class="glass-nav fixed top-0 left-0 right-0 z-50 bg-white/85 border-b border-zinc-200/60">
+    <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="index.html#hero" class="flex flex-col" aria-label="홈으로 이동">
+        <span class="text-base font-bold text-zinc-900 leading-tight">한일윌로모터펌프수리</span>
+        <span class="text-[11px] text-zinc-500 leading-tight">파워펌프 양평서비스센터</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-5">
+        <a href="index.html#service-area" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">출장지역</a>
+        <a href="index.html#reviews" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">고객후기</a>
+        <a href="index.html#gallery" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">현장사진</a>
+        <a href="#plans" class="text-sm text-zinc-900 font-semibold">멤버십</a>
+        <a href="#smartplace" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">스마트플레이스</a>
+      </nav>
+      <a href="tel:010-4757-3396" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-white text-sm sm:text-base font-bold hover:bg-accent-hover transition-colors">
+        <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
+        상담 전화
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="motion-water relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-blue-50 via-white to-white">
+      <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-r from-blue-100/70 via-emerald-50 to-amber-50 pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-5 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+          <div>
+            <div class="shine-badge fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-200 mb-6">
+              <span class="iconify text-amber-600" data-icon="solar:shield-star-bold" data-width="17"></span>
+              <span class="text-base text-amber-700 font-semibold">신뢰가는 정기점검 서비스</span>
+            </div>
+            <h1 class="fade-up stagger-1 text-4xl sm:text-5xl md:text-6xl font-bold text-zinc-900 leading-tight tracking-tight mb-6">
+              지하수 펌프<br><span class="text-gradient">안심관리 멤버십</span>
+            </h1>
+            <p class="fade-up stagger-2 text-lg sm:text-xl text-zinc-600 leading-relaxed mb-5">갑작스러운 물 끊김, 동파, 압력 저하를 줄이기 위해 정기적으로 펌프와 압력탱크 상태를 확인하는 관리 서비스입니다.</p>
+            <p class="fade-up stagger-3 text-base text-zinc-500 leading-relaxed mb-8">전원주택, 펜션, 세컨하우스, 농가처럼 지하수 사용이 생활과 영업에 바로 영향을 주는 곳에 추천드립니다.</p>
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-8">
+              <div class="rounded-xl bg-white/90 border border-amber-200 px-3 py-4 text-center shadow-sm">
+                <p class="text-xl sm:text-3xl font-bold text-zinc-900 whitespace-nowrap">149,000<span class="text-sm sm:text-lg text-amber-600">원</span></p>
+                <p class="text-xs sm:text-sm text-zinc-500 mt-2">안심회원</p>
+              </div>
+              <div class="rounded-xl bg-white/90 border border-emerald-200 px-3 py-4 text-center shadow-sm">
+                <p class="text-xl sm:text-3xl font-bold text-zinc-900 whitespace-nowrap">299,000<span class="text-sm sm:text-lg text-emerald-600">원</span></p>
+                <p class="text-xs sm:text-sm text-zinc-500 mt-2">물끊김 관리</p>
+              </div>
+              <div class="rounded-xl bg-white/90 border border-sky-200 px-3 py-4 text-center shadow-sm">
+                <p class="text-xl sm:text-3xl font-bold text-zinc-900">연 1~2회</p>
+                <p class="text-xs sm:text-sm text-zinc-500 mt-2">방문 점검</p>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="tel:010-4757-3396" class="call-pulse inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20">
+                <span class="iconify" data-icon="solar:phone-bold" data-width="20"></span>
+                멤버십 상담하기
+              </a>
+              <a href="#plans" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-zinc-300 text-zinc-700 font-semibold hover:border-zinc-400 hover:text-zinc-900 transition-colors">
+                상품 자세히 보기
+              </a>
+            </div>
+          </div>
+          <div class="fade-up stagger-2">
+            <div class="float-slow rounded-2xl bg-white border border-zinc-200/70 p-3 soft-shadow">
+              <img src="images/media/membership-flyer.png" alt="지하수 펌프 안심관리 멤버십 안내 이미지" class="w-full rounded-xl object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans" class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-5">
+        <div class="max-w-2xl mb-10">
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-sm text-blue-700 font-medium mb-5">
+            <span class="iconify" data-icon="solar:clipboard-check-bold" data-width="15"></span>
+            멤버십 구성
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">현장 상황에 맞춰 선택하는 2가지 안심관리</h2>
+          <p class="text-base text-zinc-500 leading-relaxed">단순 방문이 아니라 압력탱크, 압력스위치, 소음, 누수, 동파 위험 부위까지 함께 확인합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <article class="fade-up stagger-1 price-card rounded-2xl bg-white border border-amber-200 p-6 sm:p-8">
+            <div class="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <p class="text-sm font-bold text-amber-700 mb-2">일반 가정 · 전원주택 추천</p>
+                <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900">안심회원</h3>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-zinc-500">연</p>
+                <p class="text-4xl sm:text-5xl font-bold text-zinc-900">149,000<span class="text-lg text-amber-600">원</span></p>
+              </div>
+            </div>
+            <ul class="space-y-3 text-base text-zinc-600">
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>연 1회 방문점검</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>압력탱크 공기압 확인</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>압력스위치 작동 확인</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>펌프 소음 · 압력 · 누수 의심 확인</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>동파 위험 부위 확인</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>점검 사진 리포트 제공</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>고장 시 우선 전화상담</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>출장비 30,000원 할인권 1회</li>
+              <li class="flex gap-3"><span class="iconify text-blue-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>전기 · 누수 · 배관 협력업체 안내</li>
+            </ul>
+          </article>
+
+          <article class="fade-up stagger-2 price-card rounded-2xl bg-white border border-emerald-200 p-6 sm:p-8">
+            <div class="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <p class="text-sm font-bold text-emerald-700 mb-2">펜션 · 세컨하우스 · 농가 추천</p>
+                <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900">물끊김 안심관리</h3>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-zinc-500">연</p>
+                <p class="text-4xl sm:text-5xl font-bold text-zinc-900">299,000<span class="text-lg text-emerald-600">원</span></p>
+              </div>
+            </div>
+            <ul class="space-y-3 text-base text-zinc-600">
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>연 2회 방문점검</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>펌프 2대까지 기본 확인</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>동파 전 사전점검</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>점검 사진 리포트 제공</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>우선 상담 및 일정 조율</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>출장비 30,000원 할인권 2회</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>전기 · 누수 · 배관 협력업체 안내</li>
+              <li class="flex gap-3"><span class="iconify text-emerald-600 mt-0.5" data-icon="solar:check-circle-bold" data-width="20"></span>부품 교체 시 공임 10% 할인</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-zinc-50">
+      <div class="max-w-7xl mx-auto px-5">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8">
+          <div class="fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">이런 분께 추천합니다</h2>
+            <p class="text-base text-zinc-500 leading-relaxed mb-8">물이 끊기면 생활이나 영업에 바로 불편이 생기는 곳일수록 정기 점검의 효과가 큽니다.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="fade-up stagger-1 rounded-xl bg-white border border-zinc-200/70 p-5">
+                <span class="iconify text-blue-600 mb-3" data-icon="solar:home-2-bold" data-width="30"></span>
+                <h3 class="text-lg font-bold text-zinc-900 mb-2">지하수를 사용하는 전원주택</h3>
+                <p class="text-base text-zinc-500 leading-relaxed">상시 거주하는 집은 물 공급이 곧 생활 품질입니다.</p>
+              </div>
+              <div class="fade-up stagger-2 rounded-xl bg-white border border-zinc-200/70 p-5">
+                <span class="iconify text-sky-600 mb-3" data-icon="solar:waterdrops-bold" data-width="30"></span>
+                <h3 class="text-lg font-bold text-zinc-900 mb-2">갑자기 물이 안 나올까 걱정되는 집</h3>
+                <p class="text-base text-zinc-500 leading-relaxed">압력 저하, 잦은 작동, 소음이 있다면 미리 확인이 필요합니다.</p>
+              </div>
+              <div class="fade-up stagger-3 rounded-xl bg-white border border-zinc-200/70 p-5">
+                <span class="iconify text-amber-600 mb-3" data-icon="solar:snowflake-bold" data-width="30"></span>
+                <h3 class="text-lg font-bold text-zinc-900 mb-2">겨울철 동파가 걱정되는 고객</h3>
+                <p class="text-base text-zinc-500 leading-relaxed">배관과 펌프 주변 동파 위험 부위를 함께 확인합니다.</p>
+              </div>
+              <div class="fade-up stagger-3 rounded-xl bg-white border border-zinc-200/70 p-5">
+                <span class="iconify text-emerald-600 mb-3" data-icon="solar:buildings-3-bold" data-width="30"></span>
+                <h3 class="text-lg font-bold text-zinc-900 mb-2">펜션 · 세컨하우스처럼 물 끊기면 곤란한 곳</h3>
+                <p class="text-base text-zinc-500 leading-relaxed">예약 손실과 불편을 줄이기 위해 사전 점검이 중요합니다.</p>
+              </div>
+            </div>
+          </div>
+          <aside class="fade-up stagger-2 rounded-2xl bg-white border border-zinc-200/70 p-6 sm:p-8 h-fit">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                <span class="iconify" data-icon="solar:info-circle-bold" data-width="26"></span>
+              </div>
+              <h2 class="text-2xl font-bold text-zinc-900">안내 사항</h2>
+            </div>
+            <div class="space-y-4 text-base text-zinc-600 leading-relaxed">
+              <p>본 서비스는 정기 점검 및 상담 서비스입니다.</p>
+              <p>부품비, 수리비, 추가 출장비는 현장 상황에 따라 별도 발생할 수 있습니다.</p>
+              <p>전기, 누수, 배관 공사는 필요 시 협력업체 연결로 안내해드립니다.</p>
+              <p>현장 위치와 펌프 구성에 따라 멤버십 적용 범위가 달라질 수 있으니 전화 상담 후 안내드립니다.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="smartplace" class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-5">
+        <div class="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-8 items-center">
+          <div class="fade-up">
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#03c75a]/10 border border-[#03c75a]/20 text-sm text-[#03c75a] font-bold mb-5">
+              <span class="iconify" data-icon="simple-icons:naver" data-width="15"></span>
+              네이버 스마트플레이스
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">네이버에서 매장을 확인하고 상담하세요</h2>
+            <p class="text-base text-zinc-500 leading-relaxed mb-8">네이버 검색과 스마트플레이스에서 매장명, 주소, 전화번호, 블로그 사례를 함께 확인하면 더 안심하고 문의하실 수 있습니다.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#03c75a] text-white font-bold text-base hover:bg-[#02b351] transition-colors">
+                <span class="iconify" data-icon="solar:map-point-bold" data-width="18"></span>
+                스마트플레이스에서 보기
+              </a>
+              <a href="https://search.naver.com/search.naver?query=%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-zinc-300 text-zinc-700 font-semibold hover:border-zinc-400 hover:text-zinc-900 transition-colors">
+                네이버 검색 결과 보기
+              </a>
+            </div>
+          </div>
+          <div class="fade-up stagger-1 rounded-2xl bg-zinc-50 border border-zinc-200/70 p-6 sm:p-8">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="rounded-xl bg-white border border-zinc-200/70 p-5">
+                <p class="text-sm text-zinc-500 mb-2">매장명</p>
+                <p class="text-lg font-bold text-zinc-900 leading-snug">한일윌로모터펌프수리</p>
+                <p class="text-sm text-zinc-500 mt-1">파워펌프 양평서비스센터</p>
+              </div>
+              <div class="rounded-xl bg-white border border-zinc-200/70 p-5">
+                <p class="text-sm text-zinc-500 mb-2">주소</p>
+                <p class="text-lg font-bold text-zinc-900 leading-snug">경기도 양평군 양평읍 남북로 108</p>
+              </div>
+              <div class="rounded-xl bg-white border border-zinc-200/70 p-5">
+                <p class="text-sm text-zinc-500 mb-2">문의전화</p>
+                <a href="tel:010-4757-3396" class="text-lg font-bold text-accent hover:text-accent-hover transition-colors">010-4757-3396</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
+      <div class="max-w-3xl mx-auto px-5 text-center">
+        <h2 class="fade-up text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">정기 점검으로 물 끊김 불안을 줄여보세요</h2>
+        <p class="fade-up stagger-1 text-lg text-zinc-500 leading-relaxed mb-8">현장 위치와 사용 중인 펌프 상태를 알려주시면 적합한 멤버십과 방문 가능 여부를 안내드립니다.</p>
+        <a href="tel:010-4757-3396" class="fade-up stagger-2 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20">
+          <span class="iconify" data-icon="solar:phone-bold" data-width="20"></span>
+          010-4757-3396 상담하기
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-200 bg-zinc-50 py-10">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div>
+          <p class="text-base font-bold text-zinc-900 mb-2">한일윌로모터펌프수리 / 파워펌프 양평서비스센터</p>
+          <p class="text-base text-zinc-500">전화: <a href="tel:010-4757-3396" class="text-accent font-medium hover:text-accent-hover transition-colors">010-4757-3396</a></p>
+          <p class="text-base text-zinc-500">주소: 경기도 양평군 양평읍 남북로 108</p>
+        </div>
+        <div>
+          <p class="text-base font-semibold text-zinc-700 mb-2">네이버</p>
+          <a href="https://blog.naver.com/sunwoo774" target="_blank" rel="noopener" class="block text-base text-zinc-500 hover:text-accent transition-colors mb-1">네이버 블로그</a>
+          <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="block text-base text-zinc-500 hover:text-[#03c75a] transition-colors">네이버 스마트플레이스</a>
+        </div>
+        <div>
+          <p class="text-base font-semibold text-zinc-700 mb-2">출장 가능 지역</p>
+          <p class="text-base text-zinc-500">양평 · 남양주 · 가평 · 하남 · 여주 · 이천 · 춘천 · 원주 일부 · 포천 일부 · 경기광주 · 곤지암 · 홍천</p>
+        </div>
+      </div>
+      <div class="border-t border-zinc-200 pt-6">
+        <p class="text-xs text-zinc-400 text-center">&copy; 2026 한일윌로모터펌프수리. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="tel:010-4757-3396" class="fixed bottom-5 right-5 z-50 lg:hidden inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-accent text-white text-base font-bold shadow-lg shadow-accent/25 hover:bg-accent-hover transition-colors" aria-label="멤버십 상담하기">
+    <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
+    상담
+  </a>
+
+  <script src="analytics.js"></script>
+  <script>
+    const revealItems = Array.from(document.querySelectorAll('.fade-up'));
+    const revealOnScroll = () => {
+      const triggerY = window.innerHeight * 0.88;
+      revealItems.forEach(item => {
+        if (item.classList.contains('is-visible')) return;
+        const rect = item.getBoundingClientRect();
+        if (rect.top < triggerY) {
+          item.classList.add('is-visible');
+        }
+      });
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealItems.forEach(item => item.classList.add('is-visible'));
+    } else {
+      revealOnScroll();
+      window.addEventListener('scroll', revealOnScroll, { passive: true });
+      window.addEventListener('resize', revealOnScroll);
+    }
+  </script>
+</body>
+</html>
