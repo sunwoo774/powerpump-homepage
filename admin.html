@@ -23,8 +23,42 @@
   </script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <style>
-    body { word-break: keep-all; overflow-wrap: break-word; }
+    :root {
+      --background: #fafafa;
+      --foreground: #18181b;
+      --card: #ffffff;
+      --primary: #1d4ed8;
+      --primary-foreground: #ffffff;
+      --primary-hover: #1e40af;
+      --secondary: #f4f4f5;
+      --secondary-foreground: #27272a;
+      --border: #e4e4e7;
+      --radius: 10px;
+    }
+    body { word-break: keep-all; overflow-wrap: break-word; background: var(--background); color: var(--foreground); }
     .metric-card { box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06); }
+    .btn {
+      min-height: 40px;
+      border-radius: var(--radius);
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .btn-lg { min-height: 48px; padding: 0 20px; font-size: 16px; }
+    .btn-primary { background: var(--primary) !important; color: var(--primary-foreground) !important; border-color: var(--primary) !important; }
+    .btn-primary:hover { background: var(--primary-hover) !important; border-color: var(--primary-hover) !important; }
+    .btn-outline { background: var(--card) !important; color: var(--secondary-foreground) !important; border-color: var(--border) !important; }
+    .btn-outline:hover { border-color: #a1a1aa !important; }
+    .btn-danger { background: #fef2f2 !important; color: #b91c1c !important; border-color: #fecaca !important; }
+    .action-row { align-items: stretch; }
+    .action-row > .btn { flex: 1 1 160px; }
   </style>
 </head>
 <body class="bg-zinc-50 text-zinc-700 font-sans antialiased">
@@ -41,14 +75,14 @@
             <span class="block text-sm font-semibold text-zinc-700 mb-2">확인번호</span>
             <input id="pin-input" type="password" inputmode="numeric" autocomplete="off" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-lg focus:outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent" placeholder="확인번호 입력">
           </label>
-          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-white font-bold hover:bg-accent-hover transition-colors">
+          <button type="submit" class="btn btn-primary btn-lg w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-white font-bold hover:bg-accent-hover transition-colors">
             <span class="iconify" data-icon="solar:login-3-bold" data-width="18"></span>
             들어가기
           </button>
           <p id="login-error" class="hidden text-sm text-red-600">확인번호가 맞지 않습니다.</p>
         </form>
-        <div class="mt-6 rounded-xl bg-amber-50 border border-amber-200 p-4">
-          <p class="text-sm text-amber-800 leading-relaxed">이 확인번호 방식은 정적 사이트용 임시 보호입니다. 실제 운영에서는 Netlify/Vercel 비밀번호 보호, 서버 로그인, GA4/네이버 애널리틱스 권한 관리가 가장 안전합니다.</p>
+        <div class="mt-6 rounded-xl bg-zinc-50 border border-zinc-200 p-4">
+          <p class="text-sm text-zinc-700 leading-relaxed">이 확인번호 방식은 정적 사이트용 임시 보호입니다. 실제 운영에서는 Netlify/Vercel 비밀번호 보호, 서버 로그인, GA4/네이버 애널리틱스 권한 관리가 가장 안전합니다.</p>
         </div>
       </div>
     </section>
@@ -61,11 +95,11 @@
             <h1 class="text-3xl sm:text-4xl font-bold text-zinc-900 leading-tight">방문자 유입 통계</h1>
             <p class="text-base text-zinc-500 mt-3 leading-relaxed">현재 화면은 브라우저 로컬 이벤트를 기준으로 보여줍니다. 실제 전체 방문자 합계는 하단 운영 연결 방식으로 GA4, 네이버 애널리틱스, 서버 저장소와 연결하면 정확해집니다.</p>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="index.html" class="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-700 hover:border-zinc-400 transition-colors">
+          <div class="action-row flex flex-wrap gap-2">
+            <a href="index.html" class="btn btn-outline inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-700 hover:border-zinc-400 transition-colors">
               홈페이지 보기
             </a>
-            <button id="refresh-btn" class="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-white hover:bg-accent-hover transition-colors">
+            <button id="refresh-btn" class="btn btn-primary inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-white hover:bg-accent-hover transition-colors">
               <span class="iconify" data-icon="solar:refresh-bold" data-width="16"></span>
               새로고침
             </button>
@@ -77,17 +111,17 @@
             <p class="text-sm text-zinc-500 mb-2">총 방문 이벤트</p>
             <p id="total-views" class="text-3xl font-bold text-zinc-900">0</p>
           </div>
-          <div class="metric-card rounded-2xl bg-white border border-emerald-200 p-5">
+          <div class="metric-card rounded-2xl bg-white border border-zinc-200 p-5">
             <p class="text-sm text-zinc-500 mb-2">추정 방문자</p>
-            <p id="total-visitors" class="text-3xl font-bold text-emerald-700">0</p>
+            <p id="total-visitors" class="text-3xl font-bold text-accent">0</p>
           </div>
-          <div class="metric-card rounded-2xl bg-white border border-amber-200 p-5">
+          <div class="metric-card rounded-2xl bg-white border border-zinc-200 p-5">
             <p class="text-sm text-zinc-500 mb-2">전화 클릭</p>
-            <p id="phone-clicks" class="text-3xl font-bold text-amber-700">0</p>
+            <p id="phone-clicks" class="text-3xl font-bold text-accent">0</p>
           </div>
-          <div class="metric-card rounded-2xl bg-white border border-sky-200 p-5">
+          <div class="metric-card rounded-2xl bg-white border border-zinc-200 p-5">
             <p class="text-sm text-zinc-500 mb-2">네이버 유입/이동</p>
-            <p id="naver-clicks" class="text-3xl font-bold text-sky-700">0</p>
+            <p id="naver-clicks" class="text-3xl font-bold text-accent">0</p>
           </div>
         </div>
 
@@ -124,7 +158,7 @@
         <section class="rounded-2xl bg-zinc-900 text-white p-6 sm:p-8 mb-8">
           <div class="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6">
             <div>
-              <p class="text-sm font-bold text-amber-300 mb-2">운영 추천</p>
+              <p class="text-sm font-bold text-blue-200 mb-2">운영 추천</p>
               <h2 class="text-2xl sm:text-3xl font-bold mb-3">고객 전체 유입을 보려면 이렇게 연결하는 게 좋습니다</h2>
               <p class="text-zinc-300 leading-relaxed">관리자 페이지를 고객에게 숨기는 것과, 방문자 전체 데이터를 정확히 모으는 것은 별도 문제입니다. 실제 공개 운영 시에는 서버 인증과 공식 분석 도구를 함께 쓰는 구성이 안전합니다.</p>
             </div>
@@ -151,7 +185,7 @@
               <h2 class="text-xl font-bold text-zinc-900 mb-2">로컬 테스트 데이터 관리</h2>
               <p class="text-base text-zinc-500 leading-relaxed">이 버튼은 현재 브라우저에 저장된 임시 이벤트만 삭제합니다. 실제 분석 도구 데이터에는 영향을 주지 않습니다.</p>
             </div>
-            <button id="clear-btn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-bold text-red-700 hover:bg-red-100 transition-colors">
+            <button id="clear-btn" class="btn btn-danger inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-bold text-red-700 hover:bg-red-100 transition-colors">
               로컬 데이터 초기화
             </button>
           </div>
@@ -219,10 +253,10 @@
       renderRows('page-list', countBy(pageViews, event => event.path || '/'), '아직 페이지 방문 데이터가 없습니다.');
 
       const actions = [
-        ['전화 클릭', phoneClicks.length, 'text-amber-700 bg-amber-50 border-amber-200'],
+        ['전화 클릭', phoneClicks.length, 'text-accent bg-zinc-50 border-zinc-200'],
         ['멤버십 클릭', events.filter(event => event.type === 'membership_click').length, 'text-blue-700 bg-blue-50 border-blue-200'],
-        ['블로그 클릭', events.filter(event => event.type === 'naver_blog_click').length, 'text-emerald-700 bg-emerald-50 border-emerald-200'],
-        ['스마트플레이스 클릭', events.filter(event => event.type === 'naver_place_click').length, 'text-sky-700 bg-sky-50 border-sky-200']
+        ['블로그 클릭', events.filter(event => event.type === 'naver_blog_click').length, 'text-accent bg-zinc-50 border-zinc-200'],
+        ['스마트플레이스 클릭', events.filter(event => event.type === 'naver_place_click').length, 'text-accent bg-zinc-50 border-zinc-200']
       ];
       document.getElementById('action-list').innerHTML = actions.map(([label, count, classes]) => `
         <div class="rounded-xl border p-4 ${classes}">
