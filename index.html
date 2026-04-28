@@ -49,7 +49,7 @@
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 
   <style>
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
     body { word-break: keep-all; overflow-wrap: break-word; }
     .glass-nav { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     .text-gradient { background: linear-gradient(135deg, #1d4ed8, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -103,6 +103,17 @@
     }
     .float-slow { animation: floatSlow 5.8s ease-in-out infinite; }
     .call-pulse { animation: callPulse 2.8s ease-in-out infinite; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .fade-up, .fade-up.is-visible { opacity: 1; transform: none; filter: none; }
+    .motion-water::before, .shine-badge::after { display: none; }
+    .kakao-button {
+      background: #fee500;
+      color: #181600;
+    }
+    .kakao-button:hover {
+      background: #f4dc00;
+      color: #181600;
+    }
     @keyframes waterSweep {
       0%, 100% { transform: translateX(-35%) rotate(-3deg); opacity: 0.45; }
       50% { transform: translateX(28%) rotate(2deg); opacity: 0.9; }
@@ -128,6 +139,285 @@
         radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.12), transparent 26%),
         linear-gradient(135deg, #eff6ff 0%, #ffffff 56%, #f8fafc 100%);
     }
+    @media (max-width: 767px) {
+      body {
+        padding-bottom: calc(76px + env(safe-area-inset-bottom));
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      #header > div {
+        height: 58px;
+        padding-left: 16px;
+        padding-right: 12px;
+      }
+
+      #header a[aria-label] span:first-child {
+        max-width: 215px;
+        font-size: 15px;
+        line-height: 1.2;
+      }
+
+      #header a[aria-label] span:last-child {
+        max-width: 215px;
+        font-size: 10px;
+      }
+
+      #hamburger {
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #mobile-quick-nav {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 6px;
+        padding: 8px 12px 10px;
+        background: rgba(255, 255, 255, 0.98);
+        border-top: 1px solid rgba(228, 228, 231, 0.9);
+      }
+
+      #mobile-quick-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      #mobile-quick-nav a {
+        min-height: 42px;
+        min-width: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border-radius: 12px;
+        background: #f8fafc;
+        color: #3f3f46;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.15;
+        text-align: center;
+      }
+
+      #mobile-quick-nav a[href^="tel:"] {
+        background: #1d4ed8;
+        color: #ffffff;
+      }
+
+      #mobile-quick-nav a[href*="pf.kakao.com"] {
+        background: #fee500;
+        color: #181600;
+      }
+
+      #mobile-nav {
+        position: absolute;
+        top: 118px;
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - 118px);
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+      }
+
+      #mobile-nav > div {
+        gap: 8px;
+        padding: 12px 16px 16px;
+      }
+
+      #mobile-nav a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        flex: none;
+        border-radius: 10px;
+        padding: 10px 12px;
+        line-height: 1.35;
+        white-space: normal;
+        background: #f8fafc;
+      }
+
+      #mobile-nav a[href^="tel:"] {
+        order: -1;
+        background: #1d4ed8;
+        color: #ffffff;
+      }
+
+      #mobile-nav a[href*="pf.kakao.com"] {
+        order: -1;
+        background: #fee500;
+        color: #181600;
+        font-weight: 700;
+      }
+
+      #mobile-nav a[href="#hero"],
+      #mobile-nav a[href="#reviews"],
+      #mobile-nav a[href="#gallery"],
+      #mobile-nav a[href="membership.html"],
+      #mobile-nav a[href="#symptoms"],
+      #mobile-nav a[href^="https://blog.naver.com"],
+      #mobile-nav a[href^="https://map.naver.com"] {
+        display: none;
+      }
+
+      #hero {
+        min-height: auto;
+        align-items: flex-start;
+        padding-top: 118px;
+      }
+
+      #hero > .max-w-7xl {
+        padding: 32px 16px 28px;
+      }
+
+      #hero .shine-badge {
+        margin-bottom: 18px;
+        padding: 7px 12px;
+      }
+
+      #hero .shine-badge span:last-child {
+        font-size: 14px;
+      }
+
+      #hero h1 {
+        margin-bottom: 16px;
+        font-size: 34px;
+        line-height: 1.16;
+        letter-spacing: 0;
+      }
+
+      #hero .max-w-3xl > p {
+        font-size: 16px;
+        line-height: 1.68;
+      }
+
+      #hero .max-w-3xl > p:nth-of-type(1) {
+        margin-bottom: 18px;
+      }
+
+      #hero .max-w-3xl > p:nth-of-type(2) {
+        display: none;
+      }
+
+      #hero .flex.flex-wrap {
+        margin-bottom: 18px;
+      }
+
+      #hero .flex.flex-wrap span {
+        font-size: 13px;
+        line-height: 1.35;
+        padding: 7px 10px;
+      }
+
+      #hero .grid.grid-cols-3 {
+        gap: 8px;
+        margin-bottom: 22px;
+      }
+
+      #hero .grid.grid-cols-3 > div {
+        border-radius: 12px;
+        padding: 12px 7px;
+      }
+
+      #hero .grid.grid-cols-3 p:first-child {
+        font-size: 20px;
+        line-height: 1.05;
+      }
+
+      #hero .grid.grid-cols-3 p:last-child {
+        margin-top: 6px;
+        font-size: 11px;
+        line-height: 1.3;
+      }
+
+      #hero .fade-up.stagger-5.flex {
+        gap: 10px;
+      }
+
+      #hero .fade-up.stagger-5.flex a,
+      #mobile-nav a[href^="tel:"],
+      #cta a[href^="tel:"],
+      #cta a[href*="pf.kakao.com"] {
+        min-height: 54px;
+        width: 100%;
+        border-radius: 14px;
+        font-size: 17px;
+        line-height: 1.2;
+        padding: 15px 18px;
+      }
+
+      section {
+        scroll-margin-top: 70px;
+      }
+
+      section:not(#hero) {
+        padding-top: 52px;
+        padding-bottom: 52px;
+      }
+
+      #trust,
+      #reviews,
+      #principles,
+      #pension,
+      #gallery,
+      #blog {
+        display: none;
+      }
+
+      h2 {
+        font-size: 26px !important;
+        line-height: 1.25 !important;
+      }
+
+      h3 {
+        line-height: 1.35;
+      }
+
+      .mobile-floating-call {
+        left: 12px;
+        right: auto;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        width: calc(50% - 18px);
+        min-height: 56px;
+        justify-content: center;
+        border-radius: 16px;
+        font-size: 17px;
+        box-shadow: 0 16px 34px rgba(29, 78, 216, 0.28);
+      }
+
+      .mobile-floating-kakao {
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        width: calc(50% - 18px);
+        min-height: 56px;
+        justify-content: center;
+        border-radius: 16px;
+        font-size: 17px;
+        box-shadow: 0 16px 34px rgba(24, 22, 0, 0.16);
+      }
+    }
+
+    @media (max-width: 380px) {
+      #header a[aria-label] span:first-child,
+      #header a[aria-label] span:last-child {
+        max-width: 190px;
+      }
+
+      #hero h1 {
+        font-size: 31px;
+      }
+
+      #hero .grid.grid-cols-3 p:first-child {
+        font-size: 18px;
+      }
+
+      #hero .grid.grid-cols-3 p:last-child {
+        font-size: 10.5px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .hover-lift, .fade-up, .motion-water::before, .shine-badge::after, .float-slow, .call-pulse { transition: none; animation: none; opacity: 1; transform: none; filter: none; }
@@ -265,6 +555,7 @@
         <a href="#hero" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">홈</a>
         <a href="#service-area" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">출장지역</a>
         <a href="#travel-fee" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">출장비</a>
+        <a href="#regular-care" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">정기관리</a>
         <a href="#reviews" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">고객후기</a>
         <a href="#gallery" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">현장사진</a>
         <a href="membership.html" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">멤버십</a>
@@ -278,6 +569,10 @@
           <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
           010-4757-3396
         </a>
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full kakao-button text-sm font-bold">
+          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
+          카카오톡
+        </a>
         <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="메뉴 열기" aria-controls="mobile-nav" aria-expanded="false">
           <span class="w-5 h-0.5 bg-zinc-400 rounded transition-all"></span>
           <span class="w-5 h-0.5 bg-zinc-400 rounded transition-all"></span>
@@ -285,12 +580,26 @@
         </button>
       </div>
     </div>
+    <div id="mobile-quick-nav" class="lg:hidden">
+      <a href="tel:010-4757-3396">
+        <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
+        전화
+      </a>
+      <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener">
+        <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="15"></span>
+        카톡
+      </a>
+      <a href="#regular-care">정기관리</a>
+      <a href="membership.html">멤버십</a>
+      <a href="#travel-fee">출장비</a>
+    </div>
     <!-- Mobile Nav -->
     <div id="mobile-nav" class="hidden lg:hidden bg-white border-t border-zinc-100">
       <div class="max-w-7xl mx-auto px-5 py-4 flex flex-col gap-3">
         <a href="#hero" class="text-base text-zinc-600 py-1">홈</a>
         <a href="#service-area" class="text-base text-zinc-600 py-1">가평 출장지역</a>
         <a href="#travel-fee" class="text-base text-zinc-600 py-1">출장비</a>
+        <a href="#regular-care" class="text-base text-zinc-600 py-1">정기관리</a>
         <a href="#reviews" class="text-base text-zinc-600 py-1">고객후기</a>
         <a href="#gallery" class="text-base text-zinc-600 py-1">현장사진</a>
         <a href="membership.html" class="text-base text-zinc-600 py-1">멤버십</a>
@@ -301,6 +610,10 @@
         <a href="tel:010-4757-3396" class="mt-2 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-accent text-white text-sm font-bold">
           <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
           전화 상담하기
+        </a>
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg kakao-button text-sm font-bold">
+          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
+          카카오톡 채널 상담
         </a>
       </div>
     </div>
@@ -345,6 +658,10 @@
             <span class="iconify" data-icon="solar:phone-bold" data-width="20"></span>
             지금 전화 상담하기
           </a>
+          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl kakao-button font-bold text-base">
+            <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="20"></span>
+            카카오톡 상담
+          </a>
           <a href="#service-area" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-zinc-300 text-zinc-600 text-base font-medium hover:border-zinc-400 hover:text-zinc-900 transition-colors">
             가평 출장지역 보기
           </a>
@@ -381,6 +698,76 @@
           <a href="tel:010-4757-3396" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors shadow-md shadow-accent/15">
             <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
             지금 전화 상담하기
+          </a>
+          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl kakao-button font-bold text-base">
+            <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
+            카카오채널
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regular Care -->
+  <section id="regular-care" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="max-w-3xl mx-auto text-center mb-10 md:mb-14">
+        <p class="text-sm font-bold text-accent mb-3">정기관리 안내</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 leading-tight mb-4">지하수 펌프는 고장 전 관리가 중요합니다</h2>
+        <p class="text-base sm:text-lg text-zinc-500 leading-relaxed">물이 끊긴 뒤 급하게 수리하면 비용과 불편이 커질 수 있습니다. 펌프, 모터, 압력탱크, 전기 상태를 주기적으로 확인해 큰 고장을 미리 줄입니다.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8">
+        <article class="rounded-2xl bg-zinc-50 border border-zinc-200/70 p-6 sm:p-7 min-h-[210px] flex gap-5 items-start">
+          <div class="flex-1">
+            <p class="text-sm text-zinc-400 mb-3">POINT 01</p>
+            <h3 class="text-2xl font-bold text-zinc-900 mb-3">갑작스러운 단수 예방</h3>
+            <p class="text-base text-zinc-500 leading-relaxed">펜션, 전원주택, 농가에서 물이 갑자기 안 나오는 상황을 줄이기 위해 작동 상태를 미리 확인합니다.</p>
+          </div>
+          <span class="iconify text-blue-600 flex-shrink-0 mt-2" data-icon="solar:water-bold" data-width="42"></span>
+        </article>
+
+        <article class="rounded-2xl bg-blue-50 border border-blue-100 p-6 sm:p-7 min-h-[210px] flex gap-5 items-start">
+          <div class="flex-1">
+            <p class="text-sm text-zinc-400 mb-3">POINT 02</p>
+            <h3 class="text-2xl font-bold text-zinc-900 mb-3">교체 전 원인 점검</h3>
+            <p class="text-base text-zinc-500 leading-relaxed">펌프만 문제가 아닐 수 있습니다. 압력스위치, 압력탱크, 배관, 전기 상태를 함께 확인합니다.</p>
+          </div>
+          <span class="iconify text-emerald-600 flex-shrink-0 mt-2" data-icon="solar:settings-bold" data-width="42"></span>
+        </article>
+
+        <article class="rounded-2xl bg-blue-50 border border-blue-100 p-6 sm:p-7 min-h-[210px] flex gap-5 items-start">
+          <div class="flex-1">
+            <p class="text-sm text-zinc-400 mb-3">POINT 03</p>
+            <h3 class="text-2xl font-bold text-zinc-900 mb-3">정기 점검 기록</h3>
+            <p class="text-base text-zinc-500 leading-relaxed">방문 때마다 상태를 확인해 다음 점검 시기와 교체 가능성이 있는 부품을 안내합니다.</p>
+          </div>
+          <span class="iconify text-amber-500 flex-shrink-0 mt-2" data-icon="solar:clipboard-check-bold" data-width="42"></span>
+        </article>
+
+        <article class="rounded-2xl bg-zinc-50 border border-zinc-200/70 p-6 sm:p-7 min-h-[210px] flex gap-5 items-start">
+          <div class="flex-1">
+            <p class="text-sm text-zinc-400 mb-3">POINT 04</p>
+            <h3 class="text-2xl font-bold text-zinc-900 mb-3">현장별 맞춤 관리</h3>
+            <p class="text-base text-zinc-500 leading-relaxed">사용량이 많은 펜션, 카페, 식당과 주말주택은 사용 패턴에 맞춰 점검 주기를 안내합니다.</p>
+          </div>
+          <span class="iconify text-rose-500 flex-shrink-0 mt-2" data-icon="solar:shield-check-bold" data-width="42"></span>
+        </article>
+      </div>
+
+      <div class="rounded-2xl bg-zinc-900 text-white p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-6">
+        <div class="flex-1">
+          <h3 class="text-2xl font-bold mb-2">정기관리 상담이 필요하신가요?</h3>
+          <p class="text-base text-zinc-300 leading-relaxed">현장 위치, 펌프 종류, 사용 환경을 알려주시면 점검 가능 여부와 관리 방향을 안내드립니다.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="tel:010-4757-3396" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-zinc-900 font-bold text-base">
+            <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
+            전화 상담
+          </a>
+          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl kakao-button font-bold text-base">
+            <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
+            카카오톡 상담
           </a>
         </div>
       </div>
@@ -667,6 +1054,10 @@
           <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
           출장비 상담하기
         </a>
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="mt-3 sm:mt-0 sm:ml-3 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl kakao-button font-bold text-base">
+          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
+          카카오채널
+        </a>
       </div>
     </div>
   </section>
@@ -808,6 +1199,10 @@
           <a href="tel:010-4757-3396" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors">
             <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
             점검 상담 전화하기
+          </a>
+          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl kakao-button font-bold text-base">
+            <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
+            카카오채널
           </a>
         </div>
       </div>
@@ -1018,6 +1413,10 @@
           <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
           지금 전화 상담하기
         </a>
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl kakao-button font-bold text-base">
+          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
+          카카오톡 상담
+        </a>
         <a href="membership.html" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-amber-500 text-white font-bold text-base hover:bg-amber-600 transition-colors">
           <span class="iconify" data-icon="solar:shield-star-bold" data-width="18"></span>
           안심관리 멤버십 보기
@@ -1061,6 +1460,10 @@
     <span class="hidden sm:inline">010-4757-3396</span>
     <span class="sm:hidden">전화 상담</span>
   </a>
+  <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="mobile-floating-kakao opacity-0 pointer-events-none translate-y-3 fixed bottom-5 z-50 lg:hidden inline-flex items-center gap-2 px-5 py-3.5 rounded-full kakao-button text-base font-bold transition-all duration-300" aria-label="카카오톡 채널 상담하기">
+    <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="17"></span>
+    <span>카카오채널</span>
+  </a>
 
   <script>
     // Hamburger menu
@@ -1098,12 +1501,15 @@
     // Header scroll effect
     const header = document.getElementById('header');
     const floatingCall = document.querySelector('.mobile-floating-call');
+    const floatingKakao = document.querySelector('.mobile-floating-kakao');
     const updateFloatingCall = () => {
-      if (!floatingCall) return;
       const shouldShow = window.scrollY > window.innerHeight * 0.75;
-      floatingCall.classList.toggle('opacity-0', !shouldShow);
-      floatingCall.classList.toggle('pointer-events-none', !shouldShow);
-      floatingCall.classList.toggle('translate-y-3', !shouldShow);
+      [floatingCall, floatingKakao].forEach(button => {
+        if (!button) return;
+        button.classList.toggle('opacity-0', !shouldShow);
+        button.classList.toggle('pointer-events-none', !shouldShow);
+        button.classList.toggle('translate-y-3', !shouldShow);
+      });
     };
 
     window.addEventListener('scroll', () => {
