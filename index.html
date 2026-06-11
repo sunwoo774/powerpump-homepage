@@ -500,6 +500,16 @@
         radial-gradient(circle at 80% 20%, rgba(183, 121, 31, 0.08), transparent 26%),
         linear-gradient(135deg, #F9FAFB 0%, #ffffff 56%, #F9FAFB 100%);
     }
+
+    /* 모바일 메뉴 기본 숨김 (전역) */
+    .mobile-menu-overlay {
+      display: none !important;
+    }
+
+    .mobile-menu-overlay.active {
+      display: block !important;
+    }
+
     @media (max-width: 767px) {
       body {
         padding-bottom: 0;
@@ -1022,13 +1032,11 @@
         height: 100%;
         background: #1a2744;
         z-index: 99999;
-        display: none;
         opacity: 0;
         transition: opacity 0.3s ease;
       }
 
       .mobile-menu-overlay.active {
-        display: block;
         opacity: 1;
       }
 
@@ -1555,7 +1563,7 @@
             전화 상담하기
           </a>
           <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="mobile-menu-btn mobile-menu-btn-kakao" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 2rem; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 12px;">
-            💬 카카오톡 상담
+            카카오톡 상담
           </a>
         </div>
       </div>
@@ -1599,11 +1607,11 @@
         <div class="fade-up stagger-5 action-row" style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap;">
           <a href="tel:010-4757-3396" class="call-pulse btn btn-primary btn-lg rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; min-width: 140px;">
             <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
-            📞 전화 상담
+            전화 상담
           </a>
           <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary btn-lg rounded-xl kakao-button font-bold text-base" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; min-width: 140px;">
             <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
-            💬 카카오 상담
+            카카오 상담
           </a>
           <a href="#section-problem" class="btn btn-outline btn-lg rounded-xl border border-zinc-300 text-zinc-600 text-base font-medium hover:border-zinc-400 hover:text-zinc-900 transition-colors" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; min-width: 140px;">
             증상별 점검 보기
@@ -1859,11 +1867,11 @@
           <div class="action-row" style="display: flex; flex-direction: row; gap: 10px;">
             <a href="tel:010-4757-3396" class="btn btn-primary rounded-xl" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
               <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
-              📞 전화 상담
+              전화 상담
             </a>
             <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary kakao-button rounded-xl" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
               <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
-              💬 카카오 상담
+              카카오 상담
             </a>
           </div>
         </div>
@@ -2285,11 +2293,11 @@
       <div class="action-row" style="display: flex; flex-direction: row; gap: 10px; justify-content: center; max-width: 600px; margin: 0 auto;">
         <a href="tel:010-4757-3396" class="btn btn-primary rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
           <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
-          📞 출장비 상담
+          출장비 상담
         </a>
         <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="rounded-xl kakao-button font-bold text-base" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
           <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
-          💬 카카오 상담
+          카카오 상담
         </a>
       </div>
     </div>
