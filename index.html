@@ -502,15 +502,6 @@
         linear-gradient(135deg, #F9FAFB 0%, #ffffff 56%, #F9FAFB 100%);
     }
 
-    /* 모바일 메뉴 기본 숨김 (전역) */
-    .mobile-menu-overlay {
-      display: none !important;
-    }
-
-    .mobile-menu-overlay.active {
-      display: block !important;
-    }
-
     @media (max-width: 767px) {
       body {
         padding-bottom: 0;
@@ -615,98 +606,6 @@
       #mobile-quick-nav a[href*="pf.kakao.com"] {
         background: #fee500;
         color: #181600;
-      }
-
-      #mobile-nav {
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        height: 100vh !important;
-        width: 280px !important;
-        overflow-y: auto !important;
-        background: #ffffff !important;
-        z-index: 1000 !important;
-        border-left: 1px solid #e4e4e7 !important;
-        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15) !important;
-        transform: translateX(100%) !important;
-        transition: transform 0.3s ease !important;
-        padding-top: 24px !important;
-      }
-
-      #mobile-nav.hidden {
-        transform: translateX(100%) !important;
-      }
-
-      #mobile-nav:not(.hidden) {
-        transform: translateX(0) !important;
-      }
-
-      #mobile-nav > div {
-        gap: 12px;
-        padding: 20px 20px 40px;
-      }
-
-      #mobile-nav::before {
-        display: none;
-      }
-
-      body::after {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-
-      body.menu-open::after {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      #mobile-nav a {
-        min-height: 54px;
-        display: flex;
-        align-items: center;
-        flex: none;
-        border-radius: 14px;
-        padding: 16px 18px;
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 1.4;
-        white-space: normal;
-        background: #F4F4F5;
-        color: #18181b;
-        border: 1px solid #e4e4e7;
-      }
-
-      #mobile-nav a[href^="tel:"] {
-        order: -1;
-        background: var(--primary);
-        color: #ffffff;
-        font-weight: 700;
-        border-color: var(--primary);
-        min-height: 60px;
-      }
-
-      #mobile-nav a[href*="pf.kakao.com"] {
-        order: -1;
-        background: #fee500;
-        color: #181600;
-        font-weight: 700;
-        border-color: #fee500;
-        min-height: 60px;
-      }
-
-      #mobile-nav a[href="#hero"],
-      #mobile-nav a[href^="https://blog.naver.com"],
-      #mobile-nav a[href^="https://map.naver.com"] {
-        display: none;
       }
 
       #hero {
@@ -814,7 +713,6 @@
       }
 
       #hero .fade-up.stagger-5.flex a,
-      #mobile-nav a[href^="tel:"],
       #cta a[href^="tel:"],
       #cta a[href*="pf.kakao.com"] {
         min-height: 60px;
@@ -1024,124 +922,24 @@
         position: relative !important;
       }
 
-      /* === 모바일 메뉴 - 풀스크린 오버레이 === */
-      .mobile-menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #1a2744;
-        z-index: 99999;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+      /* === 새 모바일 메뉴 === */
+      .m-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 998; }
+      .m-drawer {
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 80%; max-width: 320px; background: #fff; z-index: 999;
+        transform: translateX(100%); transition: transform .25s ease;
+        display: flex; flex-direction: column;
       }
-
-      .mobile-menu-overlay.active {
-        opacity: 1;
-      }
-
-      .mobile-menu-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-      }
-
-      /* X 닫기 버튼 */
-      .mobile-menu-close {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-        padding: 0.5rem;
-        z-index: 100000;
-      }
-
-      .mobile-menu-close svg {
-        display: block;
-      }
-
-      /* 메뉴 항목 */
-      .mobile-menu-nav {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 3rem 1.5rem;
-      }
-
-      .mobile-menu-link {
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-align: center;
-        padding: 1.25rem 2rem;
-        width: 100%;
-        max-width: 400px;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        transition: all 0.2s ease;
-      }
-
-      .mobile-menu-link:active {
-        background: rgba(255, 255, 255, 0.1);
-        transform: scale(0.98);
-      }
-
-      /* 하단 버튼 */
-      .mobile-menu-footer {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-        padding: 0 0 1rem;
-      }
-
-      .mobile-menu-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        width: 100%;
-        height: 52px !important;
-        min-height: 52px !important;
-        max-height: 52px !important;
-        padding: 0 2rem !important;
-        font-size: 1.125rem;
-        font-weight: 700;
-        text-decoration: none;
-        border-radius: 12px;
-        transition: all 0.2s ease;
-        box-sizing: border-box !important;
-      }
-
-      .mobile-menu-btn-call {
-        background: #B7791F;
-        color: white;
-        box-shadow: 0 4px 12px rgba(183, 121, 31, 0.3);
-      }
-
-      .mobile-menu-btn-call:active {
-        background: #92400E;
-        transform: scale(0.98);
-      }
-
-      .mobile-menu-btn-kakao {
-        background: #FEE500;
-        color: #000000;
-      }
-
-      .mobile-menu-btn-kakao:active {
-        background: #FDD835;
-        transform: scale(0.98);
-      }
+      .m-drawer.open { transform: translateX(0); }
+      .m-backdrop.open { display: block; }
+      .m-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #eee; }
+      .m-drawer-close { width: 44px; height: 44px; border: none; background: none; font-size: 22px; cursor: pointer; }
+      .m-drawer-nav { flex: 1; overflow-y: auto; }
+      .m-drawer-nav a { display: block; padding: 16px 20px; font-size: 17px; font-weight: 500; color: #111; text-decoration: none; border-bottom: 1px solid #f0f0f0; background: none; border-radius: 0; }
+      .m-drawer-cta { padding: 16px 20px; padding-bottom: calc(16px + env(safe-area-inset-bottom)); display: grid; gap: 10px; border-top: 1px solid #eee; }
+      .m-drawer-cta a { display: flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 12px; font-size: 16px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+      .m-cta-call { background: #1a2b5c; color: #fff; }
+      .m-cta-kakao { background: #fee500; color: #191919; }
 
       /* === Compact CTA Buttons === */
       .cta-btn {
@@ -1159,6 +957,20 @@
       .action-row {
         gap: 10px !important;
         align-items: flex-start !important;
+      }
+
+      /* 네이버 블로그 섹션 - 2열 그리드 */
+      #blog .action-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+      }
+
+      #blog .action-row > a {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 52px !important;
+        padding: 12px 16px !important;
       }
 
       /* 햄버거 버튼 최상위 */
@@ -1282,13 +1094,6 @@
       .container, .max-w-7xl {
         padding-left: 1.25rem !important;
         padding-right: 1.25rem !important;
-      }
-
-      /* 햄버거 메뉴 링크 크기 */
-      #mobile-nav a {
-        font-size: 1.125rem !important;
-        padding: 1.25rem 1.5rem !important;
-        min-height: 60px !important;
       }
 
       /* 배경 어둡게 */
@@ -1534,41 +1339,26 @@
       <a href="#section-price">출장비</a>
       <a href="#gallery">사진</a>
     </div>
-    <!-- Mobile Nav - 풀스크린 오버레이 -->
-    <div id="mobile-nav" class="mobile-menu-overlay">
-      <div class="mobile-menu-container">
-        <!-- X 닫기 버튼 -->
-        <button id="close-nav" class="mobile-menu-close" aria-label="메뉴 닫기">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-
-        <!-- 메뉴 항목 -->
-        <nav class="mobile-menu-nav">
-          <a href="#section-problem" class="mobile-menu-link">고장 증상</a>
-          <a href="#section-trust" class="mobile-menu-link">신뢰 요소</a>
-          <a href="#section-process" class="mobile-menu-link">작업 방식</a>
-          <a href="#section-service" class="mobile-menu-link">서비스 항목</a>
-          <a href="#section-price" class="mobile-menu-link">출장비</a>
-          <a href="#section-review" class="mobile-menu-link">고객후기</a>
-        </nav>
-
-        <!-- 하단 연락 버튼 -->
-        <div class="mobile-menu-footer">
-          <a href="tel:010-4757-3396" class="mobile-menu-btn mobile-menu-btn-call" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 2rem; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 12px;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            전화 상담하기
-          </a>
-          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="mobile-menu-btn mobile-menu-btn-kakao" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 2rem; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 12px;">
-            카카오톡 상담
-          </a>
-        </div>
+    <!-- Mobile Drawer -->
+    <div id="mBackdrop" class="m-backdrop"></div>
+    <aside id="mDrawer" class="m-drawer">
+      <div class="m-drawer-head">
+        <span style="font-weight: 700; font-size: 18px;">메뉴</span>
+        <button id="mClose" class="m-drawer-close">×</button>
       </div>
-    </div>
+      <nav class="m-drawer-nav">
+        <a href="#section-problem">고장 증상</a>
+        <a href="#section-trust">신뢰 요소</a>
+        <a href="#section-process">작업 방식</a>
+        <a href="#section-service">서비스 항목</a>
+        <a href="#section-price">출장비</a>
+        <a href="#section-review">고객후기</a>
+      </nav>
+      <div class="m-drawer-cta">
+        <a href="tel:010-4757-3396" class="m-cta-call">전화 상담</a>
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="m-cta-kakao">카카오톡 상담</a>
+      </div>
+    </aside>
   </header>
 
   <!-- Hero -->
@@ -2767,65 +2557,14 @@
     }
 
     // === 모바일 메뉴 JavaScript ===
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobile-nav');
-    const closeNavBtn = document.getElementById('close-nav');
-    const menuLinks = document.querySelectorAll('.mobile-menu-link');
-
-    // 메뉴 열기
-    function openMenu() {
-      mobileNav.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    // 메뉴 닫기
-    function closeMenu() {
-      mobileNav.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    // 햄버거 버튼 클릭
-    if (hamburger) {
-      hamburger.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        openMenu();
-      });
-    }
-
-    // X 버튼 클릭
-    if (closeNavBtn) {
-      closeNavBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeMenu();
-      });
-    }
-
-    // 메뉴 항목 클릭
-    menuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-
-        if (targetSection) {
-          // 메뉴 닫기
-          closeMenu();
-
-          // 부드럽게 스크롤
-          setTimeout(() => {
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 400);
-        }
-      });
-    });
-
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        closeMobileNav();
-      }
-    });
+    const drawer = document.getElementById('mDrawer');
+    const backdrop = document.getElementById('mBackdrop');
+    const open = () => { drawer.classList.add('open'); backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    const close = () => { drawer.classList.remove('open'); backdrop.classList.remove('open'); document.body.style.overflow = ''; };
+    document.getElementById('hamburger').addEventListener('click', open);
+    document.getElementById('mClose').addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    drawer.querySelectorAll('.m-drawer-nav a').forEach(a => a.addEventListener('click', close));
 
     // Header scroll effect
     const header = document.getElementById('header');
