@@ -86,7 +86,7 @@
       --ring: rgba(11, 42, 85, 0.18);
       --radius: 14px;
     }
-    html { scroll-behavior: auto; }
+    html { scroll-behavior: smooth; }
     body {
       word-break: keep-all;
       overflow-wrap: break-word;
@@ -94,6 +94,8 @@
       color: var(--foreground);
       font-weight: 400;
       animation: pageLoad 0.3s ease-out;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     @keyframes pageLoad {
       from {
@@ -251,8 +253,58 @@
       background: linear-gradient(180deg, var(--muted) 0%, var(--background) 100%) !important;
     }
     #hero {
-      min-height: auto;
+      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(180deg, #F9FAFB 0%, #ffffff 82%) !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-quick-actions {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e4e4e7;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-quick-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 8px;
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .hero-quick-btn:active {
+      transform: scale(0.95);
+      background: #F4F4F5;
+    }
+
+    .hero-quick-btn .iconify {
+      font-size: 28px;
+      color: #0B2A55;
+    }
+
+    .hero-quick-btn .iconify[data-icon*="kakaotalk"] {
+      color: #FEE500;
+    }
+
+    .hero-quick-btn span:last-child {
+      font-size: 13px;
+      font-weight: 600;
+      color: #18181b;
+      text-align: center;
+      line-height: 1.3;
     }
     #hero .absolute.top-1\/4 {
       display: none;
@@ -442,9 +494,6 @@
       0%, 100% { box-shadow: 0 10px 28px rgba(11, 42, 85, 0.20); }
       50% { box-shadow: 0 14px 38px rgba(11, 42, 85, 0.34); }
     }
-    #hamburger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 20px; }
-    #hamburger.is-open span:nth-child(2) { opacity: 0; }
-    #hamburger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 20px; }
     .service-visual {
       background:
         radial-gradient(circle at 20% 15%, rgba(11, 42, 85, 0.10), transparent 28%),
@@ -453,9 +502,26 @@
     }
     @media (max-width: 767px) {
       body {
-        padding-bottom: calc(76px + env(safe-area-inset-bottom));
+        padding-bottom: 0;
         font-size: 16px;
         line-height: 1.65;
+      }
+
+      body.scrollable {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      #header {
+        overflow: visible !important;
+      }
+
+      #mobile-quick-nav {
+        display: none !important;
+      }
+
+      .mobile-floating-call,
+      .mobile-floating-kakao {
+        display: none !important;
       }
 
       #header > div {
@@ -476,21 +542,37 @@
       }
 
       #hamburger {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         align-items: center;
         justify-content: center;
+        background: #F4F4F5;
+        border-radius: 12px;
+        border: 1px solid #e4e4e7;
       }
+
+      #hamburger span {
+        background: #52525b !important;
+        height: 2.5px !important;
+        width: 22px !important;
+      }
+
+      #hamburger.is-open { background: #0B2A55 !important; border-color: #0B2A55 !important; }
+      #hamburger.is-open span { background: #ffffff !important; }
+      #hamburger.is-open span:nth-child(1) { transform: translateY(9px) rotate(45deg); width: 22px; }
+      #hamburger.is-open span:nth-child(2) { opacity: 0; }
+      #hamburger.is-open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); width: 22px; }
 
       #mobile-quick-nav {
         display: flex;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        gap: 6px;
-        padding: 8px 12px 10px;
-        background: rgba(255, 255, 255, 0.98);
-        border-top: 1px solid rgba(228, 228, 231, 0.9);
+        gap: 8px;
+        padding: 12px 16px 14px;
+        background: #ffffff;
+        border-top: 1px solid #e4e4e7;
+        box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.05);
       }
 
       #mobile-quick-nav::-webkit-scrollbar {
@@ -498,19 +580,20 @@
       }
 
       #mobile-quick-nav a {
-        min-height: 42px;
-        min-width: 72px;
+        min-height: 48px;
+        min-width: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 5px;
-        border-radius: 12px;
+        gap: 6px;
+        border-radius: 14px;
         background: #F9FAFB;
         color: #3f3f46;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 700;
-        line-height: 1.15;
+        line-height: 1.2;
         text-align: center;
+        padding: 8px 12px;
       }
 
       #mobile-quick-nav a[href^="tel:"] {
@@ -524,37 +607,80 @@
       }
 
       #mobile-nav {
-        position: absolute;
-        top: 118px;
-        left: 0;
-        right: 0;
-        max-height: calc(100dvh - 118px);
-        overflow-y: auto;
-        background: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        height: 100vh !important;
+        width: 280px !important;
+        overflow-y: auto !important;
+        background: #ffffff !important;
+        z-index: 1000 !important;
+        border-left: 1px solid #e4e4e7 !important;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15) !important;
+        transform: translateX(100%) !important;
+        transition: transform 0.3s ease !important;
+        padding-top: 24px !important;
+      }
+
+      #mobile-nav.hidden {
+        transform: translateX(100%) !important;
+      }
+
+      #mobile-nav:not(.hidden) {
+        transform: translateX(0) !important;
       }
 
       #mobile-nav > div {
-        gap: 8px;
-        padding: 12px 16px 16px;
+        gap: 12px;
+        padding: 20px 20px 40px;
+      }
+
+      #mobile-nav::before {
+        display: none;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      body.menu-open::after {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       #mobile-nav a {
-        min-height: 44px;
+        min-height: 54px;
         display: flex;
         align-items: center;
         flex: none;
-        border-radius: 10px;
-        padding: 10px 12px;
-        line-height: 1.35;
+        border-radius: 14px;
+        padding: 16px 18px;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 1.4;
         white-space: normal;
-        background: #F9FAFB;
+        background: #F4F4F5;
+        color: #18181b;
+        border: 1px solid #e4e4e7;
       }
 
       #mobile-nav a[href^="tel:"] {
         order: -1;
         background: var(--primary);
         color: #ffffff;
+        font-weight: 700;
+        border-color: var(--primary);
+        min-height: 60px;
       }
 
       #mobile-nav a[href*="pf.kakao.com"] {
@@ -562,6 +688,8 @@
         background: #fee500;
         color: #181600;
         font-weight: 700;
+        border-color: #fee500;
+        min-height: 60px;
       }
 
       #mobile-nav a[href="#hero"],
@@ -571,34 +699,60 @@
       }
 
       #hero {
-        min-height: auto;
+        height: 100vh;
+        min-height: 100vh;
         align-items: flex-start;
-        padding-top: 118px;
+        padding-top: 132px;
+        padding-bottom: 0;
       }
 
       #hero > .max-w-7xl {
-        padding: 32px 16px 28px;
+        padding: 20px 20px 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero-quick-actions {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+      }
+
+      .hero-quick-btn {
+        padding: 14px 6px;
+        gap: 6px;
+        border-radius: 12px;
+      }
+
+      .hero-quick-btn .iconify {
+        font-size: 24px;
+      }
+
+      .hero-quick-btn span:last-child {
+        font-size: 12px;
       }
 
       #hero .shine-badge {
-        margin-bottom: 18px;
-        padding: 7px 12px;
+        margin-bottom: 22px;
+        padding: 10px 16px;
       }
 
       #hero .shine-badge span:last-child {
-        font-size: 14px;
+        font-size: 16px;
       }
 
       #hero h1 {
-        margin-bottom: 16px;
-        font-size: 34px;
-        line-height: 1.16;
-        letter-spacing: 0;
+        margin-bottom: 20px;
+        font-size: 38px;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
       }
 
       #hero .max-w-3xl > p {
-        font-size: 16px;
-        line-height: 1.68;
+        font-size: 18px;
+        line-height: 1.75;
       }
 
       #hero .max-w-3xl > p:nth-of-type(1) {
@@ -610,50 +764,55 @@
       }
 
       #hero .flex.flex-wrap {
-        margin-bottom: 18px;
+        margin-bottom: 22px;
+        gap: 8px;
       }
 
       #hero .flex.flex-wrap span {
-        font-size: 13px;
-        line-height: 1.35;
-        padding: 7px 10px;
+        font-size: 15px;
+        line-height: 1.4;
+        padding: 10px 14px;
+        border-radius: 12px;
       }
 
       #hero .grid.grid-cols-3 {
         gap: 8px;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
       }
 
       #hero .grid.grid-cols-3 > div {
         border-radius: 12px;
-        padding: 12px 7px;
+        padding: 12px 8px;
       }
 
       #hero .grid.grid-cols-3 p:first-child {
-        font-size: 20px;
-        line-height: 1.05;
+        font-size: 20px !important;
+        line-height: 1.1 !important;
+        font-weight: 700;
       }
 
       #hero .grid.grid-cols-3 p:last-child {
         margin-top: 6px;
-        font-size: 11px;
-        line-height: 1.3;
+        font-size: 11px !important;
+        line-height: 1.3 !important;
       }
 
       #hero .fade-up.stagger-5.flex {
         gap: 10px;
+        display: none !important;
       }
 
       #hero .fade-up.stagger-5.flex a,
       #mobile-nav a[href^="tel:"],
       #cta a[href^="tel:"],
       #cta a[href*="pf.kakao.com"] {
-        min-height: 54px;
+        min-height: 60px;
         width: 100%;
-        border-radius: 14px;
-        font-size: 17px;
-        line-height: 1.2;
-        padding: 15px 18px;
+        border-radius: 16px;
+        font-size: 18px;
+        line-height: 1.3;
+        padding: 18px 20px;
+        font-weight: 700;
       }
 
       section {
@@ -661,8 +820,13 @@
       }
 
       section:not(#hero) {
-        padding-top: 52px;
-        padding-bottom: 52px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+
+      section > .max-w-7xl {
+        padding-left: 20px;
+        padding-right: 20px;
       }
 
       #pension {
@@ -676,34 +840,43 @@
       #reviews .rounded-xl,
       #reviews article,
       .faq-item {
-        padding: 20px !important;
+        padding: 24px !important;
+        border-radius: 16px !important;
       }
 
       #travel-fee .grid,
       #symptoms .grid,
       #service-area .grid,
       #reviews .grid {
-        gap: 12px !important;
+        gap: 16px !important;
       }
 
       h2 {
-        font-size: 26px !important;
-        line-height: 1.25 !important;
+        font-size: 30px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
       }
 
       h3 {
-        line-height: 1.35;
+        font-size: 20px !important;
+        line-height: 1.4 !important;
+      }
+
+      p, li {
+        font-size: 17px !important;
+        line-height: 1.7 !important;
       }
 
       .mobile-floating-call {
-        left: 12px;
+        left: 16px;
         right: auto;
-        bottom: calc(12px + env(safe-area-inset-bottom));
-        width: calc(50% - 18px);
-        min-height: 56px;
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        width: calc(50% - 22px);
+        min-height: 62px;
         justify-content: center;
-        border-radius: 16px;
-        font-size: 17px;
+        border-radius: 18px;
+        font-size: 18px;
+        font-weight: 700;
         box-shadow: 0 16px 34px rgba(11, 42, 85, 0.28);
       }
 
@@ -738,9 +911,381 @@
       }
     }
 
+    /* === Gallery Horizontal Scroll === */
+    .gallery-scroll-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0 1.25rem 1.5rem;
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-scroll article {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 85vw;
+      max-width: 350px;
+    }
+
+    /* Gallery Dots */
+    .gallery-dots-container {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .gallery-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .gallery-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-dot.active {
+      background: #B7791F;
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Desktop: show grid */
+    @media (min-width: 768px) {
+      .gallery-scroll-container {
+        padding: 0 1.25rem;
+      }
+
+      .gallery-scroll {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        overflow-x: visible;
+        scroll-snap-type: none;
+        padding: 0;
+      }
+
+      .gallery-scroll article {
+        width: 100%;
+        max-width: none;
+      }
+
+      .gallery-dots-container {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .gallery-scroll {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .hover-lift, .fade-up, .motion-water::before, .shine-badge::after, .float-slow, .call-pulse { transition: none; animation: none; opacity: 1; transform: none; filter: none; }
+    }
+
+    /* 모바일 최적화 - 첫 화면만 보이기 */
+    @media (max-width: 767px) {
+      /* body 스크롤 활성화 */
+      body {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        position: relative !important;
+      }
+
+      /* === 모바일 메뉴 - 풀스크린 오버레이 === */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1a2744;
+        z-index: 99999;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-menu-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .mobile-menu-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+      }
+
+      /* X 닫기 버튼 */
+      .mobile-menu-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 100000;
+      }
+
+      .mobile-menu-close svg {
+        display: block;
+      }
+
+      /* 메뉴 항목 */
+      .mobile-menu-nav {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 3rem 1.5rem;
+      }
+
+      .mobile-menu-link {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 1.25rem 2rem;
+        width: 100%;
+        max-width: 400px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.2s ease;
+      }
+
+      .mobile-menu-link:active {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(0.98);
+      }
+
+      /* 하단 버튼 */
+      .mobile-menu-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 0 0 1rem;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        height: 52px !important;
+        min-height: 52px !important;
+        max-height: 52px !important;
+        padding: 0 2rem !important;
+        font-size: 1.125rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        box-sizing: border-box !important;
+      }
+
+      .mobile-menu-btn-call {
+        background: #B7791F;
+        color: white;
+        box-shadow: 0 4px 12px rgba(183, 121, 31, 0.3);
+      }
+
+      .mobile-menu-btn-call:active {
+        background: #92400E;
+        transform: scale(0.98);
+      }
+
+      .mobile-menu-btn-kakao {
+        background: #FEE500;
+        color: #000000;
+      }
+
+      .mobile-menu-btn-kakao:active {
+        background: #FDD835;
+        transform: scale(0.98);
+      }
+
+      /* === Compact CTA Buttons === */
+      .cta-btn {
+        height: 52px !important;
+        min-height: 52px !important;
+        max-height: 52px !important;
+        padding: 0 20px !important;
+        font-size: 16px !important;
+        border-radius: 12px !important;
+        white-space: nowrap;
+        line-height: 1 !important;
+        box-sizing: border-box !important;
+      }
+
+      .action-row {
+        gap: 10px !important;
+        align-items: flex-start !important;
+      }
+
+      /* 햄버거 버튼 최상위 */
+      #hamburger {
+        position: relative;
+        z-index: 100001;
+      }
+
+      /* Hero 섹션 모바일 최적화 */
+      #hero {
+        min-height: 100vh !important;
+        padding: 6rem 1.5rem 3rem !important;
+      }
+
+      #hero .absolute,
+      #hero .fade-up.stagger-5.hidden {
+        display: none !important;
+      }
+
+      #hero .shine-badge {
+        font-size: 0.875rem !important;
+        padding: 0.5rem 1rem !important;
+      }
+
+      #hero h1 {
+        font-size: 2rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1.5rem !important;
+        text-align: left !important;
+      }
+
+      #hero h1 br {
+        display: block !important;
+      }
+
+      #hero p {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1.25rem !important;
+      }
+
+      #hero .flex-wrap {
+        margin-bottom: 1.5rem !important;
+      }
+
+      #hero .grid-cols-3 {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+        margin-bottom: 2rem !important;
+      }
+
+      #hero .action-row {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+      }
+
+      #hero .action-row a {
+        width: 100% !important;
+        min-height: 56px !important;
+        font-size: 1.125rem !important;
+        padding: 1rem 1.5rem !important;
+      }
+
+      /* Hero 오른쪽 이미지 숨김 */
+      #hero .grid > div:last-child {
+        display: none !important;
+      }
+
+      /* 모든 섹션 표시 */
+      section {
+        display: block !important;
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+      }
+
+      #hero {
+        display: flex !important;
+        padding-bottom: 3rem !important;
+      }
+
+      /* 스크롤 오프셋 */
+      section {
+        scroll-margin-top: 70px !important;
+      }
+
+      /* 섹션 제목 크기 */
+      section h2 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1.5rem !important;
+      }
+
+      section h3 {
+        font-size: 1.125rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+
+      section p {
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+      }
+
+      /* 버튼 크기 */
+      .btn, .btn-lg {
+        min-height: 52px !important;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+
+      /* 그리드 간격 */
+      .grid {
+        gap: 1rem !important;
+      }
+
+      /* 카드 패딩 */
+      article {
+        padding: 1.25rem !important;
+      }
+
+      /* 컨테이너 패딩 */
+      .container, .max-w-7xl {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+      }
+
+      /* 햄버거 메뉴 링크 크기 */
+      #mobile-nav a {
+        font-size: 1.125rem !important;
+        padding: 1.25rem 1.5rem !important;
+        min-height: 60px !important;
+      }
+
+      /* 배경 어둡게 */
+      body.menu-open::after {
+        z-index: 9998 !important;
+      }
     }
   </style>
 
@@ -926,7 +1471,7 @@
   }
   </script>
 </head>
-<body class="bg-white text-zinc-700 font-sans antialiased">
+<body class="bg-white text-zinc-700 font-sans antialiased scrollable">
 
   <!-- Header -->
   <header id="header" class="glass-nav fixed top-0 left-0 right-0 z-50 bg-white/80 border-b border-zinc-200/60 transition-all duration-300">
@@ -975,36 +1520,44 @@
         <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="15"></span>
         카톡
       </a>
-      <a href="#new-symptoms">증상</a>
-      <a href="#services">서비스</a>
-      <a href="#travel-fee">출장비</a>
+      <a href="#section-problem">증상</a>
+      <a href="#section-service">서비스</a>
+      <a href="#section-price">출장비</a>
       <a href="#gallery">사진</a>
     </div>
-    <!-- Mobile Nav -->
-    <div id="mobile-nav" class="hidden lg:hidden bg-white border-t border-zinc-100">
-      <div class="max-w-7xl mx-auto px-5 py-4 flex flex-col gap-3">
-        <a href="index.html#hero" class="text-base text-zinc-600 py-1">홈</a>
-        <a href="index.html#new-symptoms" class="text-base text-zinc-600 py-1">고장 증상</a>
-        <a href="index.html#advantages" class="text-base text-zinc-600 py-1">신뢰 요소</a>
-        <a href="index.html#work-style" class="text-base text-zinc-600 py-1">작업 방식</a>
-        <a href="index.html#services" class="text-base text-zinc-600 py-1">서비스 항목</a>
-        <a href="index.html#travel-fee" class="text-base text-zinc-600 py-1">출장비</a>
-        <a href="index.html#new-reviews" class="text-base text-zinc-600 py-1">고객후기</a>
-        <a href="index.html#gallery" class="text-base text-zinc-600 py-1">현장사진</a>
-        <a href="index.html#blog" class="text-base text-zinc-600 py-1">네이버 확인</a>
-        <a href="used-motors.html" class="text-base text-zinc-600 py-1">중고 모터·펌프 판매</a>
-        <a href="membership.html" class="text-base text-zinc-600 py-1">멤버십</a>
-        <a href="index.html#faq" class="text-base text-zinc-600 py-1">FAQ</a>
-        <a href="https://blog.naver.com/sunwoo774" target="_blank" rel="noopener" class="text-base text-zinc-600 py-1">블로그</a>
-        <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="text-base text-zinc-600 py-1">스마트플레이스</a>
-        <a href="tel:010-4757-3396" class="btn btn-primary btn-sm mt-2 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-accent text-white text-sm font-bold">
-          <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
-          전화 상담하기
-        </a>
-        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg kakao-button text-sm font-bold">
-          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
-          카카오톡 채널 상담
-        </a>
+    <!-- Mobile Nav - 풀스크린 오버레이 -->
+    <div id="mobile-nav" class="mobile-menu-overlay">
+      <div class="mobile-menu-container">
+        <!-- X 닫기 버튼 -->
+        <button id="close-nav" class="mobile-menu-close" aria-label="메뉴 닫기">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- 메뉴 항목 -->
+        <nav class="mobile-menu-nav">
+          <a href="#section-problem" class="mobile-menu-link">고장 증상</a>
+          <a href="#section-trust" class="mobile-menu-link">신뢰 요소</a>
+          <a href="#section-process" class="mobile-menu-link">작업 방식</a>
+          <a href="#section-service" class="mobile-menu-link">서비스 항목</a>
+          <a href="#section-price" class="mobile-menu-link">출장비</a>
+          <a href="#section-review" class="mobile-menu-link">고객후기</a>
+        </nav>
+
+        <!-- 하단 연락 버튼 -->
+        <div class="mobile-menu-footer">
+          <a href="tel:010-4757-3396" class="mobile-menu-btn mobile-menu-btn-call" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 2rem; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 12px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            전화 상담하기
+          </a>
+          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="mobile-menu-btn mobile-menu-btn-kakao" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 2rem; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 12px;">
+            💬 카카오톡 상담
+          </a>
+        </div>
       </div>
     </div>
   </header>
@@ -1043,16 +1596,16 @@
             <p class="text-xs sm:text-sm text-zinc-500 mt-2">예상 비용 안내</p>
           </div>
         </div>
-        <div class="fade-up stagger-5 action-row flex flex-col sm:flex-row gap-3">
-          <a href="tel:010-4757-3396" class="call-pulse btn btn-primary btn-lg inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20">
-            <span class="iconify" data-icon="solar:phone-bold" data-width="20"></span>
-            지금 전화 상담하기
+        <div class="fade-up stagger-5 action-row" style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap;">
+          <a href="tel:010-4757-3396" class="call-pulse btn btn-primary btn-lg rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; min-width: 140px;">
+            <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
+            📞 전화 상담
           </a>
-          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary btn-lg inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl kakao-button font-bold text-base">
-            <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="20"></span>
-            카카오톡 상담
+          <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary btn-lg rounded-xl kakao-button font-bold text-base" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; min-width: 140px;">
+            <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
+            💬 카카오 상담
           </a>
-          <a href="#new-symptoms" class="btn btn-outline btn-lg inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-zinc-300 text-zinc-600 text-base font-medium hover:border-zinc-400 hover:text-zinc-900 transition-colors">
+          <a href="#section-problem" class="btn btn-outline btn-lg rounded-xl border border-zinc-300 text-zinc-600 text-base font-medium hover:border-zinc-400 hover:text-zinc-900 transition-colors" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; min-width: 140px;">
             증상별 점검 보기
           </a>
         </div>
@@ -1070,10 +1623,34 @@
       </div>
       </div>
     </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="hero-quick-actions">
+      <a href="tel:010-4757-3396" class="hero-quick-btn">
+        <span class="iconify" data-icon="solar:phone-bold"></span>
+        <span>전화걸기</span>
+      </a>
+      <a href="sms:010-4757-3396" class="hero-quick-btn">
+        <span class="iconify" data-icon="solar:chat-round-line-bold"></span>
+        <span>문자문의</span>
+      </a>
+      <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="hero-quick-btn">
+        <span class="iconify" data-icon="simple-icons:kakaotalk"></span>
+        <span>온라인문의</span>
+      </a>
+      <button onclick="scrollToSection('gallery')" class="hero-quick-btn">
+        <span class="iconify" data-icon="solar:gallery-bold"></span>
+        <span>포토갤러리</span>
+      </button>
+      <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="hero-quick-btn">
+        <span class="iconify" data-icon="solar:map-point-bold"></span>
+        <span>오시는길</span>
+      </a>
+    </div>
   </section>
 
   <!-- New Symptoms -->
-  <section id="new-symptoms" class="py-14 md:py-20 bg-white">
+  <section id="section-problem" class="py-14 md:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-5">
       <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-start">
         <div class="fade-up">
@@ -1111,7 +1688,7 @@
   </section>
 
   <!-- Advantages -->
-  <section id="advantages" class="py-16 md:py-24 bg-zinc-50">
+  <section id="section-trust" class="py-16 md:py-24 bg-zinc-50">
     <div class="max-w-7xl mx-auto px-5">
       <div class="max-w-2xl mb-10">
         <p class="text-sm font-bold text-accent mb-3">상담과 작업 기준</p>
@@ -1144,7 +1721,7 @@
   </section>
 
   <!-- Work Style -->
-  <section id="work-style" class="py-16 md:py-24 bg-white">
+  <section id="section-process" class="py-16 md:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-5">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <div class="fade-up rounded-2xl overflow-hidden border border-zinc-200 bg-white shadow-sm">
@@ -1178,7 +1755,7 @@
   </section>
 
   <!-- Services -->
-  <section id="services" class="py-16 md:py-24 bg-zinc-50">
+  <section id="section-service" class="py-16 md:py-24 bg-zinc-50">
     <div class="max-w-7xl mx-auto px-5">
       <div class="max-w-2xl mb-10">
         <p class="text-sm font-bold text-accent mb-3">서비스 항목</p>
@@ -1279,14 +1856,14 @@
           <p class="text-sm font-bold text-accent mb-3">출장 안내</p>
           <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 leading-tight mb-4">주소와 증상을 알려주시면 방문 가능 여부를 안내드립니다</h2>
           <p class="text-base text-zinc-500 leading-relaxed mb-6">가평읍, 청평면, 설악면, 상면, 조종면, 북면 등 가평 전 지역과 인근 지역 출장 상담이 가능합니다. 출장비는 거리와 작업 상황에 따라 달라질 수 있습니다.</p>
-          <div class="action-row flex flex-col sm:flex-row gap-3">
-            <a href="tel:010-4757-3396" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl">
+          <div class="action-row" style="display: flex; flex-direction: row; gap: 10px;">
+            <a href="tel:010-4757-3396" class="btn btn-primary rounded-xl" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
               <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
-              전화로 출장 상담
+              📞 전화 상담
             </a>
-            <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary kakao-button inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl">
+            <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary kakao-button rounded-xl" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
               <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
-              카카오채널 상담
+              💬 카카오 상담
             </a>
           </div>
         </div>
@@ -1303,7 +1880,7 @@
   </section>
 
   <!-- New Reviews -->
-  <section id="new-reviews" class="py-16 md:py-24 bg-zinc-50">
+  <section id="section-review" class="py-16 md:py-24 bg-zinc-50">
     <div class="max-w-7xl mx-auto px-5">
       <div class="max-w-2xl mb-10">
         <p class="text-sm font-bold text-accent mb-3">고객 후기</p>
@@ -1664,7 +2241,7 @@
   </section>
 
   <!-- Travel Fee -->
-  <section id="travel-fee" class="py-16 md:py-24">
+  <section id="section-price" class="py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-5">
       <div class="fade-up max-w-2xl mb-10">
         <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">가평 모터수리·펌프수리 출장비 안내</h2>
@@ -1705,14 +2282,14 @@
         <p class="text-base text-zinc-500">※ 현장에서 추가 작업이 필요하면 작업 전 내용과 비용을 먼저 설명드립니다.</p>
       </div>
 
-      <div class="text-center">
-        <a href="tel:010-4757-3396" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors">
-          <span class="iconify" data-icon="solar:phone-bold" data-width="16"></span>
-          출장비 상담하기
+      <div class="action-row" style="display: flex; flex-direction: row; gap: 10px; justify-content: center; max-width: 600px; margin: 0 auto;">
+        <a href="tel:010-4757-3396" class="btn btn-primary rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
+          <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
+          📞 출장비 상담
         </a>
-        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="mt-3 sm:mt-0 sm:ml-3 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl kakao-button font-bold text-base">
-          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="16"></span>
-          카카오채널
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="rounded-xl kakao-button font-bold text-base" style="flex: 1; height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
+          <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
+          💬 카카오 상담
         </a>
       </div>
     </div>
@@ -1867,12 +2444,14 @@
 
   <!-- Field Media -->
   <section id="gallery" class="py-16 md:py-24 bg-zinc-50">
-    <div class="max-w-7xl mx-auto px-5">
-      <div class="max-w-2xl mb-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-8 px-5">
         <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">실제 현장 사진</h2>
         <p class="text-base text-zinc-500 leading-relaxed">지하수펌프, 수중모터, 제어반, 압력탱크를 현장에서 확인한 자료입니다. 사진처럼 눈으로 확인한 내용을 바탕으로 수리 또는 교체 방향을 안내드립니다.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Horizontal Scroll Container -->
+      <div class="gallery-scroll-container">
+        <div class="gallery-scroll">
         <article class="md:col-span-2 rounded-2xl bg-white border border-zinc-200/70 overflow-hidden shadow-sm">
           <video class="w-full aspect-video object-cover bg-zinc-100" controls muted playsinline preload="metadata" poster="images/media/work-02.jpg">
             <source src="images/media/work-video-01.mp4" type="video/mp4">
@@ -1947,6 +2526,11 @@
             <p class="text-sm text-zinc-500 mt-1">부품과 배선 상태를 세밀하게 봅니다.</p>
           </div>
         </article>
+        </div>
+      </div>
+      <!-- Gallery Dots Indicator -->
+      <div class="gallery-dots-container">
+        <div id="gallery-dots" class="gallery-dots"></div>
       </div>
     </div>
   </section>
@@ -1986,9 +2570,9 @@
               <span class="text-base text-zinc-600 flex-1">압력탱크 교체 시기와 비용 안내</span>
               <span class="iconify text-zinc-600 group-hover:text-[#03c75a] transition-colors" data-icon="solar:arrow-right-linear" data-width="14"></span>
             </a>
-            <a href="https://blog.naver.com/sunwoo774/224078003383" target="_blank" rel="noopener" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200/60 hover:border-zinc-300 transition-colors group">
+            <a href="https://m.blog.naver.com/PostView.naver?blogId=sunwoo774&logNo=224092589393&referrerCode=0&searchKeyword=%ED%99%8D%EC%B2%9C" target="_blank" rel="noopener" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200/60 hover:border-zinc-300 transition-colors group">
               <span class="flex-shrink-0 w-7 h-7 rounded-md naver-soft flex items-center justify-center text-accent text-xs font-bold">N</span>
-              <span class="text-base text-zinc-600 flex-1">가평 전원주택 펌프수리 현장후기</span>
+              <span class="text-base text-zinc-600 flex-1">홍천 전원주택 펌프수리 현장후기</span>
               <span class="iconify text-zinc-600 group-hover:text-[#03c75a] transition-colors" data-icon="solar:arrow-right-linear" data-width="14"></span>
             </a>
             <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 hover:border-zinc-300 transition-colors group">
@@ -2057,28 +2641,28 @@
   </section>
 
   <!-- Final CTA -->
-  <section id="cta" class="py-20 md:py-28 relative overflow-hidden bg-gradient-to-b from-white to-zinc-50">
+  <section id="cta" class="py-12 md:py-16 relative overflow-hidden bg-gradient-to-b from-white to-zinc-50">
     <div class="absolute inset-0 bg-gradient-to-t from-zinc-100/30 via-transparent to-transparent pointer-events-none"></div>
     <div class="max-w-3xl mx-auto px-5 text-center relative z-10">
-      <h2 class="fade-up text-3xl sm:text-4xl font-bold text-zinc-900 mb-4 leading-tight">물이 안 나오거나 펌프 이상이 있다면 상담하세요</h2>
-      <p class="fade-up stagger-1 text-lg text-zinc-500 leading-relaxed mb-8">증상, 현장 위치, 사용 중인 펌프 종류를 알려주시면 방문 가능 여부와 예상 비용을 먼저 안내드립니다.</p>
-      <a href="tel:010-4757-3396" class="fade-up stagger-2 inline-block text-4xl sm:text-5xl font-bold text-accent mb-2 hover:text-accent-hover transition-colors">010-4757-3396</a>
-      <p class="text-base text-zinc-500 mb-8">경기도 양평군 양평읍 남북로 108</p>
-      <div class="action-row flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3">
-        <a href="tel:010-4757-3396" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-colors">
+      <h2 class="fade-up text-2xl sm:text-3xl font-bold text-zinc-900 mb-3 leading-tight">물이 안 나오거나 펌프 이상이 있다면 상담하세요</h2>
+      <p class="fade-up stagger-1 text-base text-zinc-500 leading-relaxed mb-5">증상, 현장 위치, 사용 중인 펌프 종류를 알려주시면 방문 가능 여부와 예상 비용을 먼저 안내드립니다.</p>
+      <a href="tel:010-4757-3396" class="fade-up stagger-2 inline-block text-3xl sm:text-4xl font-bold text-accent mb-2 hover:text-accent-hover transition-colors">010-4757-3396</a>
+      <p class="text-sm text-zinc-500 mb-5">경기도 양평군 양평읍 남북로 108</p>
+      <div class="action-row flex flex-col sm:flex-row sm:flex-wrap justify-center items-start max-w-2xl mx-auto" style="align-items: flex-start;">
+        <a href="tel:010-4757-3396" class="cta-btn rounded-xl bg-accent text-white font-semibold text-base hover:bg-accent-hover transition-colors" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
           <span class="iconify" data-icon="solar:phone-bold" data-width="18"></span>
-          지금 전화 상담하기
+          전화 상담
         </a>
-        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="btn btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl kakao-button font-bold text-base">
+        <a href="https://pf.kakao.com/_FxaExan" target="_blank" rel="noopener" class="cta-btn rounded-xl kakao-button font-semibold text-base" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
           <span class="iconify" data-icon="simple-icons:kakaotalk" data-width="18"></span>
-          카카오톡 상담
+          카카오톡
         </a>
-        <a href="membership.html" class="btn btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-50 text-zinc-900 font-bold text-base hover:bg-zinc-200 transition-colors">
+        <a href="membership.html" class="cta-btn rounded-xl bg-blue-50 text-zinc-900 font-semibold text-base hover:bg-blue-100 transition-colors" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
           <span class="iconify" data-icon="solar:shield-star-bold" data-width="18"></span>
-          안심관리 멤버십 보기
+          멤버십
         </a>
-        <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="btn btn-outline naver-soft inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-zinc-300 text-zinc-600 text-sm font-medium hover:border-zinc-400 hover:text-accent transition-colors">
-          네이버 매장 보기
+        <a href="https://map.naver.com/p/search/%ED%95%9C%EC%9D%BC%EC%9C%8C%EB%A1%9C%EB%AA%A8%ED%84%B0%ED%8E%8C%ED%94%84%20%EC%96%91%ED%8F%89%20%EB%82%A8%EB%B6%81%EB%A1%9C%20108" target="_blank" rel="noopener" class="cta-btn rounded-xl border border-zinc-300 text-zinc-600 text-base font-medium hover:border-zinc-400 hover:text-accent transition-colors" style="height: 52px; min-height: 52px; max-height: 52px; padding: 0 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px;">
+          네이버 매장
         </a>
       </div>
     </div>
@@ -2122,29 +2706,69 @@
   </a>
 
   <script>
-    // Hamburger menu
+    // Scroll to section function
+    function scrollToSection(sectionId) {
+      document.body.classList.add('scrollable');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+
+    // === 모바일 메뉴 JavaScript ===
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
+    const closeNavBtn = document.getElementById('close-nav');
+    const menuLinks = document.querySelectorAll('.mobile-menu-link');
 
-    const closeMobileNav = () => {
-      mobileNav.classList.add('hidden');
-      hamburger.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', '메뉴 열기');
-    };
+    // 메뉴 열기
+    function openMenu() {
+      mobileNav.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-    hamburger.addEventListener('click', () => {
-      const willOpen = mobileNav.classList.contains('hidden');
-      mobileNav.classList.toggle('hidden', !willOpen);
-      hamburger.classList.toggle('is-open', willOpen);
-      hamburger.setAttribute('aria-expanded', String(willOpen));
-      hamburger.setAttribute('aria-label', willOpen ? '메뉴 닫기' : '메뉴 열기');
-    });
+    // 메뉴 닫기
+    function closeMenu() {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
 
-    // Close mobile nav on link click
-    mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        closeMobileNav();
+    // 햄버거 버튼 클릭
+    if (hamburger) {
+      hamburger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openMenu();
+      });
+    }
+
+    // X 버튼 클릭
+    if (closeNavBtn) {
+      closeNavBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeMenu();
+      });
+    }
+
+    // 메뉴 항목 클릭
+    menuLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+
+        if (targetSection) {
+          // 메뉴 닫기
+          closeMenu();
+
+          // 부드럽게 스크롤
+          setTimeout(() => {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 400);
+        }
       });
     });
 
@@ -2221,6 +2845,101 @@
       revealOnScroll();
       window.addEventListener('scroll', revealOnScroll, { passive: true });
       window.addEventListener('resize', revealOnScroll);
+    }
+
+    // Gallery auto-slide functionality
+    const galleryScroll = document.querySelector('.gallery-scroll');
+    const galleryDotsContainer = document.getElementById('gallery-dots');
+    const galleryArticles = document.querySelectorAll('.gallery-scroll article');
+
+    if (galleryScroll && galleryDotsContainer && galleryArticles.length > 0) {
+      let autoSlideInterval;
+      let currentIndex = 0;
+      const slideIntervalTime = 3000; // 3 seconds
+
+      // Create dots
+      galleryArticles.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'gallery-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          scrollToSlide(index);
+          resetAutoSlide();
+        });
+        galleryDotsContainer.appendChild(dot);
+      });
+
+      const dots = galleryDotsContainer.querySelectorAll('.gallery-dot');
+
+      // Update active dot
+      function updateActiveDot(index) {
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+        currentIndex = index;
+      }
+
+      // Scroll to specific slide
+      function scrollToSlide(index) {
+        const article = galleryArticles[index];
+        if (article) {
+          const scrollLeft = article.offsetLeft - galleryScroll.offsetLeft;
+          galleryScroll.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+          updateActiveDot(index);
+        }
+      }
+
+      // Auto-slide to next
+      function autoSlide() {
+        const nextIndex = (currentIndex + 1) % galleryArticles.length;
+        scrollToSlide(nextIndex);
+      }
+
+      // Start auto-slide
+      function startAutoSlide() {
+        autoSlideInterval = setInterval(autoSlide, slideIntervalTime);
+      }
+
+      // Reset auto-slide timer
+      function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+      }
+
+      // Detect which slide is visible using IntersectionObserver
+      const observerOptions = {
+        root: galleryScroll,
+        threshold: 0.5
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = Array.from(galleryArticles).indexOf(entry.target);
+            updateActiveDot(index);
+          }
+        });
+      }, observerOptions);
+
+      galleryArticles.forEach(article => observer.observe(article));
+
+      // Reset timer on manual scroll/touch
+      let scrollTimeout;
+      galleryScroll.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          resetAutoSlide();
+        }, 150);
+      }, { passive: true });
+
+      // Start auto-slide
+      startAutoSlide();
+
+      // Clear interval on page unload
+      window.addEventListener('beforeunload', () => {
+        clearInterval(autoSlideInterval);
+        observer.disconnect();
+      });
     }
   </script>
 </body>
